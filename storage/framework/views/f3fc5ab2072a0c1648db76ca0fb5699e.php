@@ -1,18 +1,18 @@
 <!DOCTYPE html>
-<html lang="{{ str_replace('_', '-', app()->getLocale()) }}">
+<html lang="<?php echo e(str_replace('_', '-', app()->getLocale())); ?>">
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <meta name="csrf-token" content="{{ csrf_token() }}">
+    <meta name="csrf-token" content="<?php echo e(csrf_token()); ?>">
 
-    <title>{{ config('app.name', 'TeamBoard') }} - @yield('title', 'Dashboard')</title>
+    <title><?php echo e(config('app.name', 'TeamBoard')); ?> - <?php echo $__env->yieldContent('title', 'Dashboard'); ?></title>
 
     <!-- Fonts -->
     <link rel="preconnect" href="https://fonts.bunny.net">
     <link href="https://fonts.bunny.net/css?family=inter:400,500,600,700,800&display=swap" rel="stylesheet" />
 
     <!-- Scripts -->
-    @vite(['resources/css/app.css', 'resources/js/app.js'])
+    <?php echo app('Illuminate\Foundation\Vite')(['resources/css/app.css', 'resources/js/app.js']); ?>
     <script defer src="https://cdn.jsdelivr.net/npm/alpinejs@3.x.x/dist/cdn.min.js"></script>
 </head>
 <body class="font-sans antialiased bg-background">
@@ -24,7 +24,7 @@
         <aside id="sidebar" class="fixed inset-y-0 left-0 z-50 w-64 bg-white border-r border-border transform -translate-x-full lg:translate-x-0 lg:static lg:inset-auto transition-transform duration-300 ease-in-out flex flex-col">
             <!-- Logo -->
             <div class="h-16 flex items-center justify-between px-6 border-b border-border">
-                <a href="{{ route('dashboard') }}" class="flex items-center gap-3 group">
+                <a href="<?php echo e(route('dashboard')); ?>" class="flex items-center gap-3 group">
                     <div class="w-10 h-10 rounded-xl bg-gradient-to-br from-primary to-accent flex items-center justify-center shadow-lg group-hover:shadow-xl transition-all duration-300 group-hover:scale-105">
                         <svg class="w-6 h-6 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 20h5v-2a3 3 0 00-5.356-1.857M17 20H7m10 0v-2c0-.656-.126-1.283-.356-1.857M7 20H2v-2a3 3 0 015.356-1.857M7 20v-2c0-.656.126-1.283.356-1.857m0 0a5.002 5.002 0 019.288 0M15 7a3 3 0 11-6 0 3 3 0 016 0z"></path>
@@ -36,39 +36,39 @@
             
             <!-- Navigation -->
             <nav class="flex-1 px-4 py-6 space-y-2 overflow-y-auto">
-                <a href="{{ route('dashboard') }}" class="sidebar-link {{ request()->routeIs('dashboard') ? 'active' : '' }}">
+                <a href="<?php echo e(route('dashboard')); ?>" class="sidebar-link <?php echo e(request()->routeIs('dashboard') ? 'active' : ''); ?>">
                     <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                         <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 12l2-2m0 0l7-7 7 7M5 10v10a1 1 0 001 1h3m10-11l2 2m-2-2v10a1 1 0 01-1 1h-3m-6 0a1 1 0 001-1v-4a1 1 0 011-1h2a1 1 0 011 1v4a1 1 0 001 1m-6 0h6"></path>
                     </svg>
                     <span>Dashboard</span>
                 </a>
                 
-                <a href="{{ route('employees.index') }}" class="sidebar-link {{ request()->routeIs('employees.*') ? 'active' : '' }}">
+                <a href="<?php echo e(route('employees.index')); ?>" class="sidebar-link <?php echo e(request()->routeIs('employees.*') ? 'active' : ''); ?>">
                     <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                         <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 4.354a4 4 0 110 5.292M15 21H3v-1a6 6 0 0112 0v1zm0 0h6v-1a6 6 0 00-9-5.197M13 7a4 4 0 11-8 0 4 4 0 018 0z"></path>
                     </svg>
                     <span>Employees</span>
                 </a>
                 
-                <a href="{{ route('notices.index') }}" class="sidebar-link {{ request()->routeIs('notices.*') ? 'active' : '' }}">
+                <a href="<?php echo e(route('notices.index')); ?>" class="sidebar-link <?php echo e(request()->routeIs('notices.*') ? 'active' : ''); ?>">
                     <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                         <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M11 5.882V19.24a1.76 1.76 0 01-3.417.592l-2.147-6.15M18 13a3 3 0 100-6M5.436 13.683A4.001 4.001 0 017 6h1.832c4.1 0 7.625-1.234 9.168-3v14c-1.543-1.766-5.067-3-9.168-3H7a3.988 3.988 0 01-1.564-.317z"></path>
                     </svg>
                     <span>Notices</span>
                 </a>
                 
-                <a href="{{ route('documents.index') }}" class="sidebar-link {{ request()->routeIs('documents.*') ? 'active' : '' }}">
+                <a href="<?php echo e(route('documents.index')); ?>" class="sidebar-link <?php echo e(request()->routeIs('documents.*') ? 'active' : ''); ?>">
                     <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                         <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z"></path>
                     </svg>
                     <span>Documents</span>
                 </a>
                 
-                @auth
-                    @if(auth()->user()->isAdmin())
+                <?php if(auth()->guard()->check()): ?>
+                    <?php if(auth()->user()->isAdmin()): ?>
                         <div class="pt-4 mt-4 border-t border-border">
                             <p class="px-3 mb-2 text-xs font-semibold text-muted-foreground uppercase tracking-wider">Admin</p>
-                            <a href="{{ route('admin.index') }}" class="sidebar-link {{ request()->routeIs('admin.*') ? 'active' : '' }}">
+                            <a href="<?php echo e(route('admin.index')); ?>" class="sidebar-link <?php echo e(request()->routeIs('admin.*') ? 'active' : ''); ?>">
                                 <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                                     <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10.325 4.317c.426-1.756 2.924-1.756 3.35 0a1.724 1.724 0 002.573 1.066c1.543-.94 3.31.826 2.37 2.37a1.724 1.724 0 001.065 2.572c1.756.426 1.756 2.924 0 3.35a1.724 1.724 0 00-1.066 2.573c.94 1.543-.826 3.31-2.37 2.37a1.724 1.724 0 00-2.572 1.065c-.426 1.756-2.924 1.756-3.35 0a1.724 1.724 0 00-2.573-1.066c-1.543.94-3.31-.826-2.37-2.37a1.724 1.724 0 00-1.065-2.572c-1.756-.426-1.756-2.924 0-3.35a1.724 1.724 0 001.066-2.573c-.94-1.543.826-3.31 2.37-2.37.996.608 2.296.07 2.572-1.065z"></path>
                                     <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 12a3 3 0 11-6 0 3 3 0 016 0z"></path>
@@ -76,21 +76,22 @@
                                 <span>Settings</span>
                             </a>
                         </div>
-                    @endif
-                @endauth
+                    <?php endif; ?>
+                <?php endif; ?>
             </nav>
             
             <!-- User Section -->
-            @auth
+            <?php if(auth()->guard()->check()): ?>
             <div class="p-4 border-t border-border">
                 <div x-data="{ open: false }" class="relative">
                     <button @click="open = !open" class="w-full flex items-center gap-3 p-3 rounded-xl hover:bg-accent/50 transition-all duration-200">
                         <div class="w-10 h-10 rounded-full bg-gradient-to-br from-primary to-accent flex items-center justify-center text-white font-semibold shadow-md">
-                            {{ substr(auth()->user()->name, 0, 1) }}
+                            <?php echo e(substr(auth()->user()->name, 0, 1)); ?>
+
                         </div>
                         <div class="flex-1 text-left">
-                            <p class="text-sm font-medium text-foreground truncate">{{ auth()->user()->name }}</p>
-                            <p class="text-xs text-muted-foreground truncate">{{ auth()->user()->email }}</p>
+                            <p class="text-sm font-medium text-foreground truncate"><?php echo e(auth()->user()->name); ?></p>
+                            <p class="text-xs text-muted-foreground truncate"><?php echo e(auth()->user()->email); ?></p>
                         </div>
                         <svg class="w-4 h-4 text-muted-foreground transition-transform duration-200" :class="{ 'rotate-180': open }" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path>
@@ -106,8 +107,8 @@
                          x-transition:leave-end="opacity-0 scale-95 -translate-y-2"
                          @click.away="open = false" 
                          class="absolute bottom-full left-0 right-0 mb-2 bg-white rounded-xl shadow-xl border border-border overflow-hidden">
-                        <form method="POST" action="{{ route('logout') }}">
-                            @csrf
+                        <form method="POST" action="<?php echo e(route('logout')); ?>">
+                            <?php echo csrf_field(); ?>
                             <button type="submit" class="w-full flex items-center gap-3 px-4 py-3 text-sm text-foreground hover:bg-accent/50 transition-colors">
                                 <svg class="w-5 h-5 text-muted-foreground" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                                     <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 16l4-4m0 0l-4-4m4 4H7m6 4v1a3 3 0 01-3 3H6a3 3 0 01-3-3V7a3 3 0 013-3h4a3 3 0 013 3v1"></path>
@@ -118,7 +119,7 @@
                     </div>
                 </div>
             </div>
-            @endauth
+            <?php endif; ?>
         </aside>
         
         <!-- Main Content -->
@@ -135,7 +136,7 @@
                     
                     <!-- Page Title -->
                     <div class="hidden lg:block">
-                        <h1 class="text-lg font-semibold text-foreground">@yield('title', 'Dashboard')</h1>
+                        <h1 class="text-lg font-semibold text-foreground"><?php echo $__env->yieldContent('title', 'Dashboard'); ?></h1>
                     </div>
                     
                     <!-- Search Bar -->
@@ -175,28 +176,28 @@
                                  x-transition:leave-end="opacity-0 scale-95 -translate-y-2"
                                  @click.away="open = false"
                                  class="absolute right-0 mt-2 w-48 bg-white rounded-xl shadow-xl border border-border overflow-hidden">
-                                <a href="{{ route('notices.create') }}" class="flex items-center gap-3 px-4 py-3 text-sm text-foreground hover:bg-accent/50 transition-colors">
+                                <a href="<?php echo e(route('notices.create')); ?>" class="flex items-center gap-3 px-4 py-3 text-sm text-foreground hover:bg-accent/50 transition-colors">
                                     <svg class="w-5 h-5 text-primary" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                                         <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M11 5.882V19.24a1.76 1.76 0 01-3.417.592l-2.147-6.15M18 13a3 3 0 100-6M5.436 13.683A4.001 4.001 0 017 6h1.832c4.1 0 7.625-1.234 9.168-3v14c-1.543-1.766-5.067-3-9.168-3H7a3.988 3.988 0 01-1.564-.317z"></path>
                                     </svg>
                                     <span>New Notice</span>
                                 </a>
-                                <a href="{{ route('documents.create') }}" class="flex items-center gap-3 px-4 py-3 text-sm text-foreground hover:bg-accent/50 transition-colors">
+                                <a href="<?php echo e(route('documents.create')); ?>" class="flex items-center gap-3 px-4 py-3 text-sm text-foreground hover:bg-accent/50 transition-colors">
                                     <svg class="w-5 h-5 text-primary" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                                         <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M7 16a4 4 0 01-.88-7.903A5 5 0 1115.9 6L16 6a5 5 0 011 9.9M15 13l-3-3m0 0l-3 3m3-3v12"></path>
                                     </svg>
                                     <span>Upload Document</span>
                                 </a>
-                                @auth
-                                    @if(auth()->user()->isAdmin())
-                                        <a href="{{ route('employees.create') }}" class="flex items-center gap-3 px-4 py-3 text-sm text-foreground hover:bg-accent/50 transition-colors">
+                                <?php if(auth()->guard()->check()): ?>
+                                    <?php if(auth()->user()->isAdmin()): ?>
+                                        <a href="<?php echo e(route('employees.create')); ?>" class="flex items-center gap-3 px-4 py-3 text-sm text-foreground hover:bg-accent/50 transition-colors">
                                             <svg class="w-5 h-5 text-primary" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                                                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M18 9v3m0 0v3m0-3h3m-3 0h-3m-2-5a4 4 0 11-8 0 4 4 0 018 0zM3 20a6 6 0 0112 0v1H3v-1z"></path>
                                             </svg>
                                             <span>Add Employee</span>
                                         </a>
-                                    @endif
-                                @endauth
+                                    <?php endif; ?>
+                                <?php endif; ?>
                             </div>
                         </div>
                     </div>
@@ -205,7 +206,7 @@
             
             <!-- Page Content -->
             <main class="flex-1 p-4 sm:p-6 lg:p-8">
-                @if(session('success'))
+                <?php if(session('success')): ?>
                     <div data-success-message class="mb-6 rounded-xl bg-primary/10 border border-primary/20 p-4 animate-slide-in">
                         <div class="flex items-center gap-3">
                             <div class="w-8 h-8 rounded-full bg-primary/20 flex items-center justify-center">
@@ -213,12 +214,12 @@
                                     <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path>
                                 </svg>
                             </div>
-                            <p class="text-sm font-medium text-foreground">{{ session('success') }}</p>
+                            <p class="text-sm font-medium text-foreground"><?php echo e(session('success')); ?></p>
                         </div>
                     </div>
-                @endif
+                <?php endif; ?>
 
-                @if(session('error'))
+                <?php if(session('error')): ?>
                     <div class="mb-6 rounded-xl bg-destructive/10 border border-destructive/20 p-4 animate-slide-in">
                         <div class="flex items-center gap-3">
                             <div class="w-8 h-8 rounded-full bg-destructive/20 flex items-center justify-center">
@@ -226,21 +227,22 @@
                                     <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"></path>
                                 </svg>
                             </div>
-                            <p class="text-sm font-medium text-foreground">{{ session('error') }}</p>
+                            <p class="text-sm font-medium text-foreground"><?php echo e(session('error')); ?></p>
                         </div>
                     </div>
-                @endif
+                <?php endif; ?>
 
-                @yield('content')
+                <?php echo $__env->yieldContent('content'); ?>
             </main>
             
             <!-- Footer -->
             <footer class="py-4 px-6 border-t border-border bg-white/50">
                 <p class="text-center text-sm text-muted-foreground">
-                    &copy; {{ date('Y') }} TeamBoard. Built with <span class="text-destructive">♥</span> for teams.
+                    &copy; <?php echo e(date('Y')); ?> TeamBoard. Built with <span class="text-destructive">♥</span> for teams.
                 </p>
             </footer>
         </div>
     </div>
 </body>
 </html>
+<?php /**PATH C:\Users\hagga\Documents\GitHub\TeamBoard\resources\views/layouts/app.blade.php ENDPATH**/ ?>
