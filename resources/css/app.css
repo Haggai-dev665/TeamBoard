@@ -1,3 +1,5 @@
+@import url('https://fonts.googleapis.com/css2?family=Raleway:wght@300;400;500;600;700;800&display=swap');
+
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
@@ -38,6 +40,9 @@
     --ring: 151 67% 72%;
     
     --radius: 0.5rem;
+    
+    /* Font */
+    --font-sans: 'Raleway', system-ui, -apple-system, sans-serif;
   }
 
   .dark {
@@ -240,6 +245,270 @@
     @apply border-border;
   }
   body {
-    @apply bg-background text-foreground;
+    @apply bg-background text-foreground antialiased;
+    font-family: var(--font-sans);
+  }
+  h1, h2, h3, h4, h5, h6 {
+    font-family: var(--font-sans);
+    @apply font-semibold tracking-tight;
+  }
+}
+
+/* ===== BUTTON COMPONENT STYLES ===== */
+@layer components {
+  .btn {
+    @apply inline-flex items-center justify-center gap-2 whitespace-nowrap rounded-md text-sm font-medium transition-all duration-200 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:pointer-events-none disabled:opacity-50;
+  }
+  
+  .btn [class*="icon"], .btn svg {
+    @apply pointer-events-none shrink-0;
+    width: 1rem;
+    height: 1rem;
+  }
+  
+  /* Button Variants */
+  .btn-default {
+    @apply bg-primary text-primary-foreground shadow-md hover:bg-primary/90 hover:shadow-lg active:shadow-md;
+  }
+  
+  .btn-destructive {
+    @apply bg-destructive text-destructive-foreground shadow-sm hover:bg-destructive/90;
+  }
+  
+  .btn-outline {
+    @apply border border-input bg-background shadow-sm hover:bg-accent hover:text-accent-foreground;
+  }
+  
+  .btn-secondary {
+    @apply bg-secondary text-secondary-foreground shadow-sm hover:bg-secondary/80;
+  }
+  
+  .btn-ghost {
+    @apply hover:bg-accent hover:text-accent-foreground;
+  }
+  
+  .btn-link {
+    @apply text-primary underline-offset-4 hover:underline;
+  }
+  
+  /* Button Sizes */
+  .btn-sm {
+    @apply h-8 rounded-md px-3 text-xs;
+  }
+  
+  .btn-default-size {
+    @apply h-9 px-4 py-2;
+  }
+  
+  .btn-lg {
+    @apply h-10 rounded-md px-8 text-base;
+  }
+  
+  .btn-icon {
+    @apply h-9 w-9 p-0;
+  }
+}
+
+/* ===== CARD COMPONENT STYLES ===== */
+@layer components {
+  .card {
+    @apply rounded-xl border border-border bg-card text-card-foreground shadow-sm transition-all duration-200;
+  }
+  
+  .card-hover {
+    @apply hover:shadow-lg hover:-translate-y-0.5;
+  }
+  
+  .card-header {
+    @apply flex flex-col space-y-1.5 p-6;
+  }
+  
+  .card-title {
+    @apply font-semibold leading-none tracking-tight;
+  }
+  
+  .card-description {
+    @apply text-sm text-muted-foreground;
+  }
+  
+  .card-content {
+    @apply p-6 pt-0;
+  }
+  
+  .card-footer {
+    @apply flex items-center p-6 pt-0;
+  }
+}
+
+/* ===== TABLE COMPONENT STYLES ===== */
+@layer components {
+  .table-wrapper {
+    @apply relative w-full overflow-auto rounded-xl border border-border;
+  }
+  
+  .table {
+    @apply w-full caption-bottom text-sm;
+  }
+  
+  .table-header {
+    @apply bg-muted/50;
+  }
+  
+  .table-header tr {
+    @apply border-b border-border;
+  }
+  
+  .table-body tr {
+    @apply border-b border-border transition-colors hover:bg-muted/50;
+  }
+  
+  .table-body tr:last-child {
+    @apply border-0;
+  }
+  
+  .table-body tr[data-state="selected"] {
+    @apply bg-muted;
+  }
+  
+  .table-footer {
+    @apply border-t bg-muted/50 font-medium;
+  }
+  
+  .table-footer tr:last-child {
+    @apply border-b-0;
+  }
+  
+  .table-head {
+    @apply h-12 px-4 text-left align-middle font-semibold text-muted-foreground;
+  }
+  
+  .table-cell {
+    @apply p-4 align-middle;
+  }
+  
+  .table-caption {
+    @apply mt-4 text-sm text-muted-foreground;
+  }
+}
+
+/* ===== FORM INPUT STYLES ===== */
+@layer components {
+  .input {
+    @apply flex h-10 w-full rounded-lg border border-input bg-background px-3 py-2 text-sm ring-offset-background transition-all duration-200;
+    @apply file:border-0 file:bg-transparent file:text-sm file:font-medium file:text-foreground;
+    @apply placeholder:text-muted-foreground;
+    @apply focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2;
+    @apply disabled:cursor-not-allowed disabled:opacity-50;
+  }
+  
+  .input:focus {
+    @apply border-primary shadow-sm;
+  }
+  
+  .textarea {
+    @apply flex min-h-[80px] w-full rounded-lg border border-input bg-background px-3 py-2 text-sm ring-offset-background transition-all duration-200;
+    @apply placeholder:text-muted-foreground;
+    @apply focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2;
+    @apply disabled:cursor-not-allowed disabled:opacity-50;
+  }
+  
+  .select {
+    @apply flex h-10 w-full items-center justify-between rounded-lg border border-input bg-background px-3 py-2 text-sm ring-offset-background transition-all duration-200;
+    @apply placeholder:text-muted-foreground;
+    @apply focus:outline-none focus:ring-2 focus:ring-ring focus:ring-offset-2;
+    @apply disabled:cursor-not-allowed disabled:opacity-50;
+  }
+  
+  .label {
+    @apply text-sm font-medium leading-none peer-disabled:cursor-not-allowed peer-disabled:opacity-70;
+  }
+  
+  .form-group {
+    @apply space-y-2;
+  }
+  
+  .form-error {
+    @apply text-sm text-destructive mt-1;
+  }
+}
+
+/* ===== BADGE STYLES ===== */
+@layer components {
+  .badge {
+    @apply inline-flex items-center rounded-full px-2.5 py-0.5 text-xs font-semibold transition-colors;
+  }
+  
+  .badge-default {
+    @apply border-transparent bg-primary text-primary-foreground hover:bg-primary/80;
+  }
+  
+  .badge-secondary {
+    @apply border-transparent bg-secondary text-secondary-foreground hover:bg-secondary/80;
+  }
+  
+  .badge-destructive {
+    @apply border-transparent bg-destructive text-destructive-foreground hover:bg-destructive/80;
+  }
+  
+  .badge-outline {
+    @apply text-foreground border border-border;
+  }
+  
+  .badge-success {
+    @apply border-transparent bg-green-100 text-green-800;
+  }
+  
+  .badge-warning {
+    @apply border-transparent bg-yellow-100 text-yellow-800;
+  }
+  
+  .badge-info {
+    @apply border-transparent bg-blue-100 text-blue-800;
+  }
+}
+
+/* ===== AVATAR STYLES ===== */
+@layer components {
+  .avatar {
+    @apply relative flex shrink-0 overflow-hidden rounded-full;
+  }
+  
+  .avatar-sm {
+    @apply h-8 w-8;
+  }
+  
+  .avatar-md {
+    @apply h-10 w-10;
+  }
+  
+  .avatar-lg {
+    @apply h-12 w-12;
+  }
+  
+  .avatar-fallback {
+    @apply flex h-full w-full items-center justify-center rounded-full bg-muted font-medium text-muted-foreground;
+  }
+}
+
+/* ===== DROPDOWN STYLES ===== */
+@layer components {
+  .dropdown-content {
+    @apply z-50 min-w-[8rem] overflow-hidden rounded-xl border border-border bg-card p-1 text-card-foreground shadow-lg;
+    @apply animate-scale-in;
+  }
+  
+  .dropdown-item {
+    @apply relative flex cursor-pointer select-none items-center rounded-lg px-3 py-2 text-sm outline-none transition-colors;
+    @apply hover:bg-accent hover:text-accent-foreground;
+    @apply focus:bg-accent focus:text-accent-foreground;
+    @apply data-[disabled]:pointer-events-none data-[disabled]:opacity-50;
+  }
+  
+  .dropdown-separator {
+    @apply -mx-1 my-1 h-px bg-border;
+  }
+  
+  .dropdown-label {
+    @apply px-3 py-1.5 text-sm font-semibold;
   }
 }

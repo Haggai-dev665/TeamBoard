@@ -69,17 +69,17 @@
     </div>
 
     <div class="pt-2">
-        <button type="submit" class="w-full flex justify-center py-3 px-4 border border-transparent rounded-lg shadow-sm text-sm font-medium text-primary-foreground bg-primary hover:bg-primary/90 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-primary transition-all duration-200 transform hover:-translate-y-0.5 active:translate-y-0">
+        <x-button type="submit" class="w-full py-6 text-base">
             Create Account
-        </button>
+        </x-button>
     </div>
 
     <div class="text-center mt-6">
         <p class="text-sm text-muted-foreground">
             Already have an account? 
-            <a href="{{ route('login') }}" class="font-medium text-primary hover:text-primary/80 transition-colors underline decoration-2 decoration-transparent hover:decoration-primary/50 underline-offset-4">
+            <x-button href="{{ route('login') }}" variant="link" class="p-0 h-auto font-medium">
                 Log in
-            </a>
+            </x-button>
         </p>
     </div>
 </form>

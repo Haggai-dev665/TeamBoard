@@ -2,11 +2,12 @@
     'variant' => 'default',
     'size' => 'default',
     'type' => 'button',
-    'href' => null
+    'href' => null,
+    'disabled' => false
 ])
 
 @php
-$baseClasses = 'inline-flex items-center justify-center gap-2 whitespace-nowrap rounded-md text-sm font-medium transition-colors focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-ring disabled:pointer-events-none disabled:opacity-50';
+$baseClasses = 'inline-flex items-center justify-center gap-2 whitespace-nowrap rounded-md text-sm font-medium transition-colors focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-ring disabled:pointer-events-none disabled:opacity-50 [&_svg]:pointer-events-none [&_svg]:size-4 [&_svg]:shrink-0';
 
 $variantClasses = match($variant) {
     'default' => 'bg-primary text-primary-foreground shadow hover:bg-primary/90',
@@ -34,7 +35,7 @@ $classes = $baseClasses . ' ' . $variantClasses . ' ' . $sizeClasses;
         {{ $slot }}
     </a>
 @else
-    <button type="{{ $type }}" {{ $attributes->merge(['class' => $classes]) }}>
+    <button type="{{ $type }}" {{ $disabled ? 'disabled' : '' }} {{ $attributes->merge(['class' => $classes]) }}>
         {{ $slot }}
     </button>
 @endif

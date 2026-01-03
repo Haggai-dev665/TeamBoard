@@ -5,7 +5,8 @@ $__propNames = \Illuminate\View\ComponentAttributeBag::extractPropNames(([
     'variant' => 'default',
     'size' => 'default',
     'type' => 'button',
-    'href' => null
+    'href' => null,
+    'disabled' => false
 ]));
 
 foreach ($attributes->all() as $__key => $__value) {
@@ -25,7 +26,8 @@ foreach (array_filter(([
     'variant' => 'default',
     'size' => 'default',
     'type' => 'button',
-    'href' => null
+    'href' => null,
+    'disabled' => false
 ]), 'is_string', ARRAY_FILTER_USE_KEY) as $__key => $__value) {
     $$__key = $$__key ?? $__value;
 }
@@ -39,7 +41,7 @@ foreach ($attributes->all() as $__key => $__value) {
 unset($__defined_vars); ?>
 
 <?php
-$baseClasses = 'inline-flex items-center justify-center gap-2 whitespace-nowrap rounded-md text-sm font-medium transition-colors focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-ring disabled:pointer-events-none disabled:opacity-50';
+$baseClasses = 'inline-flex items-center justify-center gap-2 whitespace-nowrap rounded-md text-sm font-medium transition-colors focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-ring disabled:pointer-events-none disabled:opacity-50 [&_svg]:pointer-events-none [&_svg]:size-4 [&_svg]:shrink-0';
 
 $variantClasses = match($variant) {
     'default' => 'bg-primary text-primary-foreground shadow hover:bg-primary/90',
@@ -68,7 +70,7 @@ $classes = $baseClasses . ' ' . $variantClasses . ' ' . $sizeClasses;
 
     </a>
 <?php else: ?>
-    <button type="<?php echo e($type); ?>" <?php echo e($attributes->merge(['class' => $classes])); ?>>
+    <button type="<?php echo e($type); ?>" <?php echo e($disabled ? 'disabled' : ''); ?> <?php echo e($attributes->merge(['class' => $classes])); ?>>
         <?php echo e($slot); ?>
 
     </button>

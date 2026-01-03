@@ -1,9 +1,7 @@
 <?php $attributes ??= new \Illuminate\View\ComponentAttributeBag;
 
 $__newAttributes = [];
-$__propNames = \Illuminate\View\ComponentAttributeBag::extractPropNames(([
-    'variant' => 'default'
-]));
+$__propNames = \Illuminate\View\ComponentAttributeBag::extractPropNames((['hover' => false]));
 
 foreach ($attributes->all() as $__key => $__value) {
     if (in_array($__key, $__propNames)) {
@@ -18,9 +16,7 @@ $attributes = new \Illuminate\View\ComponentAttributeBag($__newAttributes);
 unset($__propNames);
 unset($__newAttributes);
 
-foreach (array_filter(([
-    'variant' => 'default'
-]), 'is_string', ARRAY_FILTER_USE_KEY) as $__key => $__value) {
+foreach (array_filter((['hover' => false]), 'is_string', ARRAY_FILTER_USE_KEY) as $__key => $__value) {
     $$__key = $$__key ?? $__value;
 }
 
@@ -32,15 +28,7 @@ foreach ($attributes->all() as $__key => $__value) {
 
 unset($__defined_vars); ?>
 
-<?php
-$classes = match($variant) {
-    'default' => 'rounded-xl border bg-card text-card-foreground shadow',
-    'hover' => 'rounded-xl border bg-card text-card-foreground shadow hover:shadow-lg transition-shadow duration-200',
-    default => 'rounded-xl border bg-card text-card-foreground shadow'
-};
-?>
-
-<div <?php echo e($attributes->merge(['class' => $classes])); ?>>
+<div <?php echo e($attributes->merge(['class' => 'rounded-xl border bg-card text-card-foreground shadow' . ($hover ? ' transition-all duration-300 hover:-translate-y-1 hover:shadow-xl' : '')])); ?>>
     <?php echo e($slot); ?>
 
 </div>
