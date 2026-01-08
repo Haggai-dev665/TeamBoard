@@ -3,168 +3,138 @@
 @section('title', 'Dashboard')
 
 @section('content')
-<div class="space-y-8">
-    <!-- Welcome Header with Animation -->
-    <div class="animate-fade-in">
-        <div class="flex flex-col md:flex-row md:items-center md:justify-between gap-4">
-            <div>
-                <h1 class="text-4xl font-bold bg-gradient-to-r from-primary via-accent to-primary bg-clip-text text-transparent">
-                    Welcome back, {{ auth()->user()->name }}! 👋
-                </h1>
-                <p class="mt-2 text-lg text-muted-foreground">
-                    Here's what's happening with your team today.
-                </p>
+<div class="space-y-6">
+    <!-- Stats Grid - Compact -->
+    <div class="grid grid-cols-2 lg:grid-cols-4 gap-4">
+        <!-- Total Employees Card -->
+        <a href="{{ route('employees.index') }}" class="group relative bg-white rounded-2xl border border-gray-100 shadow-sm hover:shadow-lg hover:border-[#86e7b8]/50 transition-all duration-300 p-5">
+            <div class="flex items-center gap-4">
+                <div class="w-12 h-12 rounded-xl bg-gradient-to-br from-blue-500 to-blue-600 flex items-center justify-center shadow-lg shadow-blue-500/20 group-hover:scale-110 transition-transform">
+                    <svg class="w-6 h-6 text-white" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 20h5v-2a3 3 0 00-5.356-1.857M17 20H7m10 0v-2c0-.656-.126-1.283-.356-1.857M7 20H2v-2a3 3 0 015.356-1.857M7 20v-2c0-.656.126-1.283.356-1.857m0 0a5.002 5.002 0 019.288 0M15 7a3 3 0 11-6 0 3 3 0 016 0z" />
+                    </svg>
+                </div>
+                <div>
+                    <p class="text-2xl font-bold text-gray-900">{{ $stats['employees'] }}</p>
+                    <p class="text-sm text-gray-500">Employees</p>
+                </div>
             </div>
-            <div class="flex items-center gap-3">
-                <span class="px-4 py-2 bg-primary/10 rounded-full text-sm font-medium text-primary animate-pulse">
-                    {{ now()->format('l, F j, Y') }}
-                </span>
-            </div>
-        </div>
-    </div>
+        </a>
 
-    <!-- Stats Grid with Micro-interactions -->
-    <div class="grid grid-cols-1 gap-6 sm:grid-cols-2 lg:grid-cols-4 stagger-animate">
-        <!-- Total Employees -->
-        <div class="stat-card group cursor-pointer" onclick="triggerConfetti()">
-            <div class="relative z-10">
-                <div class="flex items-center justify-between">
-                    <div class="p-3 rounded-xl bg-gradient-to-br from-blue-500/20 to-blue-600/20 group-hover:scale-110 transition-transform duration-300">
-                        <svg class="w-6 h-6 text-blue-600" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 20h5v-2a3 3 0 00-5.356-1.857M17 20H7m10 0v-2c0-.656-.126-1.283-.356-1.857M7 20H2v-2a3 3 0 015.356-1.857M7 20v-2c0-.656.126-1.283.356-1.857m0 0a5.002 5.002 0 019.288 0M15 7a3 3 0 11-6 0 3 3 0 016 0zm6 3a2 2 0 11-4 0 2 2 0 014 0zM7 10a2 2 0 11-4 0 2 2 0 014 0z" />
-                        </svg>
-                    </div>
-                    <span class="text-xs font-medium text-green-600 bg-green-100 px-2 py-1 rounded-full">+12%</span>
+        <!-- Total Notices Card -->
+        <a href="{{ route('notices.index') }}" class="group relative bg-white rounded-2xl border border-gray-100 shadow-sm hover:shadow-lg hover:border-[#86e7b8]/50 transition-all duration-300 p-5">
+            <div class="flex items-center gap-4">
+                <div class="w-12 h-12 rounded-xl bg-gradient-to-br from-amber-500 to-amber-600 flex items-center justify-center shadow-lg shadow-amber-500/20 group-hover:scale-110 transition-transform">
+                    <svg class="w-6 h-6 text-white" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M11 5.882V19.24a1.76 1.76 0 01-3.417.592l-2.147-6.15M18 13a3 3 0 100-6M5.436 13.683A4.001 4.001 0 017 6h1.832c4.1 0 7.625-1.234 9.168-3v14c-1.543-1.766-5.067-3-9.168-3H7a3.988 3.988 0 01-1.564-.317z" />
+                    </svg>
                 </div>
-                <div class="mt-4">
-                    <p class="text-sm font-medium text-muted-foreground">Total Employees</p>
-                    <p class="text-4xl font-bold text-foreground mt-1 group-hover:text-primary transition-colors">{{ $stats['employees'] }}</p>
+                <div>
+                    <p class="text-2xl font-bold text-gray-900">{{ $stats['notices'] }}</p>
+                    <p class="text-sm text-gray-500">Notices</p>
                 </div>
             </div>
-        </div>
+        </a>
 
-        <!-- Total Notices -->
-        <div class="stat-card group cursor-pointer" onclick="triggerConfetti()">
-            <div class="relative z-10">
-                <div class="flex items-center justify-between">
-                    <div class="p-3 rounded-xl bg-gradient-to-br from-purple-500/20 to-purple-600/20 group-hover:scale-110 transition-transform duration-300">
-                        <svg class="w-6 h-6 text-purple-600" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M11 5.882V19.24a1.76 1.76 0 01-3.417.592l-2.147-6.15M18 13a3 3 0 100-6M5.436 13.683A4.001 4.001 0 017 6h1.832c4.1 0 7.625-1.234 9.168-3v14c-1.543-1.766-5.067-3-9.168-3H7a3.988 3.988 0 01-1.564-.317z" />
-                        </svg>
-                    </div>
-                    <span class="text-xs font-medium text-blue-600 bg-blue-100 px-2 py-1 rounded-full">Active</span>
+        <!-- Total Documents Card -->
+        <a href="{{ route('documents.index') }}" class="group relative bg-white rounded-2xl border border-gray-100 shadow-sm hover:shadow-lg hover:border-[#86e7b8]/50 transition-all duration-300 p-5">
+            <div class="flex items-center gap-4">
+                <div class="w-12 h-12 rounded-xl bg-gradient-to-br from-emerald-500 to-emerald-600 flex items-center justify-center shadow-lg shadow-emerald-500/20 group-hover:scale-110 transition-transform">
+                    <svg class="w-6 h-6 text-white" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z" />
+                    </svg>
                 </div>
-                <div class="mt-4">
-                    <p class="text-sm font-medium text-muted-foreground">Total Notices</p>
-                    <p class="text-4xl font-bold text-foreground mt-1 group-hover:text-primary transition-colors">{{ $stats['notices'] }}</p>
+                <div>
+                    <p class="text-2xl font-bold text-gray-900">{{ $stats['documents'] }}</p>
+                    <p class="text-sm text-gray-500">Documents</p>
                 </div>
             </div>
-        </div>
+        </a>
 
-        <!-- Total Documents -->
-        <div class="stat-card group cursor-pointer" onclick="triggerConfetti()">
-            <div class="relative z-10">
-                <div class="flex items-center justify-between">
-                    <div class="p-3 rounded-xl bg-gradient-to-br from-orange-500/20 to-orange-600/20 group-hover:scale-110 transition-transform duration-300">
-                        <svg class="w-6 h-6 text-orange-600" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z" />
-                        </svg>
-                    </div>
-                    <span class="text-xs font-medium text-orange-600 bg-orange-100 px-2 py-1 rounded-full">{{ $stats['documents'] }} files</span>
+        <!-- High Priority Card -->
+        <a href="{{ route('notices.index') }}?priority=high" class="group relative bg-gradient-to-br from-red-50 to-white rounded-2xl border border-red-200 shadow-sm hover:shadow-lg hover:border-red-300 transition-all duration-300 p-5">
+            <div class="flex items-center gap-4">
+                <div class="w-12 h-12 rounded-xl bg-gradient-to-br from-red-500 to-red-600 flex items-center justify-center shadow-lg shadow-red-500/20 group-hover:scale-110 transition-transform">
+                    <svg class="w-6 h-6 text-white" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 9v2m0 4h.01m-6.938 4h13.856c1.54 0 2.502-1.667 1.732-3L13.732 4c-.77-1.333-2.694-1.333-3.464 0L3.34 16c-.77 1.333.192 3 1.732 3z" />
+                    </svg>
                 </div>
-                <div class="mt-4">
-                    <p class="text-sm font-medium text-muted-foreground">Total Documents</p>
-                    <p class="text-4xl font-bold text-foreground mt-1 group-hover:text-primary transition-colors">{{ $stats['documents'] }}</p>
+                <div>
+                    <p class="text-2xl font-bold text-red-600">{{ $stats['high_priority_notices'] }}</p>
+                    <p class="text-sm text-gray-500">Urgent</p>
                 </div>
             </div>
-        </div>
-
-        <!-- High Priority Notices -->
-        <div class="stat-card group cursor-pointer border-red-200 hover:border-red-400" onclick="triggerConfetti()">
-            <div class="relative z-10">
-                <div class="flex items-center justify-between">
-                    <div class="p-3 rounded-xl bg-gradient-to-br from-red-500/20 to-red-600/20 group-hover:scale-110 transition-transform duration-300">
-                        <svg class="w-6 h-6 text-red-600" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 9v2m0 4h.01m-6.938 4h13.856c1.54 0 2.502-1.667 1.732-3L13.732 4c-.77-1.333-2.694-1.333-3.464 0L3.34 16c-.77 1.333.192 3 1.732 3z" />
-                        </svg>
-                    </div>
-                    <span class="text-xs font-medium text-red-600 bg-red-100 px-2 py-1 rounded-full animate-pulse">Urgent</span>
-                </div>
-                <div class="mt-4">
-                    <p class="text-sm font-medium text-muted-foreground">High Priority</p>
-                    <p class="text-4xl font-bold text-red-600 mt-1">{{ $stats['high_priority_notices'] }}</p>
-                </div>
-            </div>
-        </div>
+        </a>
     </div>
 
     <!-- Main Content Grid -->
-    <div class="grid grid-cols-1 lg:grid-cols-3 gap-6">
+    <div class="grid grid-cols-1 xl:grid-cols-3 gap-6">
         <!-- Recent Notices - Takes 2 columns -->
-        <div class="lg:col-span-2 animate-slide-in">
-            <div class="bg-white rounded-2xl border border-border shadow-sm overflow-hidden">
-                <div class="p-6 border-b border-border bg-gradient-to-r from-primary/5 to-accent/5">
+        <div class="xl:col-span-2">
+            <div class="bg-white rounded-2xl border border-gray-100 shadow-sm overflow-hidden">
+                <div class="p-5 border-b border-gray-100 bg-gradient-to-r from-[#86e7b8]/10 via-[#b2ffa8]/10 to-transparent">
                     <div class="flex items-center justify-between">
                         <div class="flex items-center gap-3">
-                            <div class="p-2 bg-primary/10 rounded-xl">
-                                <svg class="w-5 h-5 text-primary" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                            <div class="w-10 h-10 rounded-xl bg-gradient-to-br from-amber-500 to-amber-600 flex items-center justify-center shadow-lg shadow-amber-500/20">
+                                <svg class="w-5 h-5 text-white" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                                     <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M11 5.882V19.24a1.76 1.76 0 01-3.417.592l-2.147-6.15M18 13a3 3 0 100-6M5.436 13.683A4.001 4.001 0 017 6h1.832c4.1 0 7.625-1.234 9.168-3v14c-1.543-1.766-5.067-3-9.168-3H7a3.988 3.988 0 01-1.564-.317z" />
                                 </svg>
                             </div>
-                            <div>
-                                <h3 class="text-lg font-semibold text-foreground">Recent Notices</h3>
-                                <p class="text-sm text-muted-foreground">Latest announcements and updates</p>
-                            </div>
+                            <h3 class="font-display text-lg font-bold text-gray-900">Recent Notices</h3>
                         </div>
-                        <a href="{{ route('notices.index') }}" class="inline-flex items-center gap-2 px-4 py-2 text-sm font-medium text-primary bg-primary/10 rounded-xl hover:bg-primary/20 transition-colors btn-animate">
-                            View All
-                            <svg class="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7" />
-                            </svg>
+                        <a href="{{ route('notices.index') }}" class="text-sm font-medium text-[#2d6a4f] hover:text-[#40916c] transition-colors">
+                            View All →
                         </a>
                     </div>
                 </div>
                 <div class="p-6">
                     @if($recentNotices->isEmpty())
                         <div class="text-center py-12">
-                            <div class="w-16 h-16 mx-auto mb-4 rounded-full bg-muted/50 flex items-center justify-center">
-                                <svg class="w-8 h-8 text-muted-foreground" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                            <div class="w-16 h-16 mx-auto mb-4 rounded-full bg-gray-100 flex items-center justify-center">
+                                <svg class="w-8 h-8 text-gray-400" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                                     <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M20 13V6a2 2 0 00-2-2H6a2 2 0 00-2 2v7m16 0v5a2 2 0 01-2 2H6a2 2 0 01-2-2v-5m16 0h-2.586a1 1 0 00-.707.293l-2.414 2.414a1 1 0 01-.707.293h-3.172a1 1 0 01-.707-.293l-2.414-2.414A1 1 0 006.586 13H4" />
                                 </svg>
                             </div>
-                            <p class="text-muted-foreground font-medium">No notices available</p>
-                            <p class="text-sm text-muted-foreground mt-1">Create your first notice to get started</p>
+                            <p class="text-gray-900 font-semibold mb-1">No notices available</p>
+                            <p class="text-sm text-gray-500 mb-4">Create your first notice to get started</p>
+                            <a href="{{ route('notices.create') }}" class="inline-flex items-center gap-2 px-4 py-2 text-sm font-medium text-white bg-gradient-to-r from-[#2d6a4f] to-[#40916c] rounded-xl hover:shadow-lg transition-all duration-300">
+                                <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 4v16m8-8H4"></path>
+                                </svg>
+                                Create Notice
+                            </a>
                         </div>
                     @else
-                        <div class="space-y-4 stagger-animate">
-                            @foreach($recentNotices as $notice)
-                                <div class="group flex items-start gap-4 p-4 rounded-xl hover:bg-muted/50 transition-all duration-200 cursor-pointer border border-transparent hover:border-border">
-                                    <div class="flex-shrink-0 w-10 h-10 rounded-full bg-gradient-to-br from-primary/20 to-accent/20 flex items-center justify-center group-hover:scale-110 transition-transform">
-                                        <span class="text-sm font-bold text-primary">{{ strtoupper(substr($notice->author->name ?? 'A', 0, 1)) }}</span>
+                        <div class="space-y-4">
+                            @foreach($recentNotices as $index => $notice)
+                                <div class="group flex items-start gap-4 p-4 rounded-xl hover:bg-gray-50 transition-all duration-200 cursor-pointer border border-transparent hover:border-gray-200" 
+                                     style="animation: slideInUp 0.5s ease-out {{ $index * 0.1 }}s forwards; opacity: 0;">
+                                    <div class="flex-shrink-0 w-12 h-12 rounded-xl bg-gradient-to-br from-[#86e7b8] to-[#2d6a4f] flex items-center justify-center group-hover:scale-110 transition-transform shadow-md">
+                                        <span class="text-sm font-bold text-white">{{ strtoupper(substr($notice->author->name ?? 'A', 0, 1)) }}</span>
                                     </div>
                                     <div class="flex-1 min-w-0">
-                                        <div class="flex items-start justify-between gap-4">
-                                            <div>
-                                                <a href="{{ route('notices.show', $notice) }}" class="font-semibold text-foreground hover:text-primary transition-colors">
+                                        <div class="flex flex-col sm:flex-row sm:items-start sm:justify-between gap-2">
+                                            <div class="flex-1">
+                                                <a href="{{ route('notices.show', $notice) }}" class="font-semibold text-gray-900 hover:text-[#2d6a4f] transition-colors line-clamp-1">
                                                     {{ $notice->title }}
                                                 </a>
-                                                <p class="mt-1 text-sm text-muted-foreground line-clamp-2">
+                                                <p class="mt-1 text-sm text-gray-500 line-clamp-2">
                                                     {{ Str::limit($notice->content, 120) }}
                                                 </p>
                                             </div>
-                                            <span class="flex-shrink-0 inline-flex items-center rounded-full px-3 py-1 text-xs font-semibold {{ $notice->priority_color }}">
+                                            <span class="flex-shrink-0 inline-flex items-center rounded-full px-3 py-1 text-xs font-semibold {{ $notice->priority === 'high' ? 'bg-red-100 text-red-700' : ($notice->priority === 'medium' ? 'bg-amber-100 text-amber-700' : 'bg-gray-100 text-gray-700') }}">
                                                 {{ ucfirst($notice->priority) }}
                                             </span>
                                         </div>
-                                        <div class="mt-3 flex items-center gap-3 text-xs text-muted-foreground">
-                                            <span class="flex items-center gap-1">
+                                        <div class="mt-3 flex flex-wrap items-center gap-3 text-xs text-gray-400">
+                                            <span class="flex items-center gap-1.5">
                                                 <svg class="w-3.5 h-3.5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                                                     <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z" />
                                                 </svg>
                                                 {{ $notice->author->name ?? 'Unknown' }}
                                             </span>
-                                            <span>•</span>
-                                            <span class="flex items-center gap-1">
+                                            <span class="w-1 h-1 bg-gray-300 rounded-full"></span>
+                                            <span class="flex items-center gap-1.5">
                                                 <svg class="w-3.5 h-3.5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                                                     <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z" />
                                                 </svg>
@@ -180,102 +150,49 @@
             </div>
         </div>
 
-        <!-- Quick Actions Sidebar -->
-        <div class="animate-slide-in" style="animation-delay: 100ms;">
-            <div class="bg-white rounded-2xl border border-border shadow-sm overflow-hidden">
-                <div class="p-6 border-b border-border bg-gradient-to-r from-accent/5 to-primary/5">
+        <!-- Right Sidebar - Quick Actions Only -->
+        <div>
+            <div class="bg-white rounded-2xl border border-gray-100 shadow-sm overflow-hidden">
+                <div class="p-5 border-b border-gray-100 bg-gradient-to-r from-[#b2ffa8]/10 to-transparent">
                     <div class="flex items-center gap-3">
-                        <div class="p-2 bg-accent/20 rounded-xl">
-                            <svg class="w-5 h-5 text-primary" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                        <div class="w-10 h-10 rounded-xl bg-gradient-to-br from-purple-500 to-purple-600 flex items-center justify-center shadow-lg shadow-purple-500/20">
+                            <svg class="w-5 h-5 text-white" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 10V3L4 14h7v7l9-11h-7z" />
                             </svg>
                         </div>
-                        <div>
-                            <h3 class="text-lg font-semibold text-foreground">Quick Actions</h3>
-                            <p class="text-sm text-muted-foreground">Common tasks</p>
-                        </div>
+                        <h3 class="font-display font-bold text-gray-900">Quick Actions</h3>
                     </div>
                 </div>
                 <div class="p-4 space-y-3">
-                    <a href="{{ route('notices.create') }}" class="flex items-center gap-4 p-4 rounded-xl bg-gradient-to-r from-primary to-primary/80 text-white font-medium hover:shadow-lg hover:-translate-y-0.5 transition-all duration-200 group">
-                        <div class="p-2 bg-white/20 rounded-lg group-hover:bg-white/30 transition-colors">
+                    <a href="{{ route('notices.create') }}" class="flex items-center gap-3 p-3 rounded-xl bg-gradient-to-r from-[#2d6a4f] to-[#40916c] text-white font-medium hover:shadow-lg transition-all duration-300 group">
+                        <div class="w-9 h-9 rounded-lg bg-white/20 flex items-center justify-center">
                             <svg class="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 4v16m8-8H4" />
                             </svg>
                         </div>
                         <span>Create Notice</span>
-                        <svg class="w-4 h-4 ml-auto opacity-0 group-hover:opacity-100 transition-opacity" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7" />
-                        </svg>
                     </a>
 
-                    <a href="{{ route('documents.create') }}" class="flex items-center gap-4 p-4 rounded-xl bg-muted/50 hover:bg-muted text-foreground font-medium hover:shadow-md hover:-translate-y-0.5 transition-all duration-200 group border border-transparent hover:border-border">
-                        <div class="p-2 bg-orange-100 rounded-lg">
-                            <svg class="w-5 h-5 text-orange-600" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                    <a href="{{ route('documents.create') }}" class="flex items-center gap-3 p-3 rounded-xl bg-gray-50 hover:bg-gray-100 text-gray-900 font-medium transition-all duration-300 border border-gray-100">
+                        <div class="w-9 h-9 rounded-lg bg-emerald-100 flex items-center justify-center">
+                            <svg class="w-5 h-5 text-emerald-600" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-8l-4-4m0 0L8 8m4-4v12" />
                             </svg>
                         </div>
                         <span>Upload Document</span>
-                        <svg class="w-4 h-4 ml-auto opacity-0 group-hover:opacity-100 transition-opacity text-muted-foreground" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7" />
-                        </svg>
                     </a>
 
-                    <a href="{{ route('employees.index') }}" class="flex items-center gap-4 p-4 rounded-xl bg-muted/50 hover:bg-muted text-foreground font-medium hover:shadow-md hover:-translate-y-0.5 transition-all duration-200 group border border-transparent hover:border-border">
-                        <div class="p-2 bg-blue-100 rounded-lg">
+                    <a href="{{ route('employees.create') }}" class="flex items-center gap-3 p-3 rounded-xl bg-gray-50 hover:bg-gray-100 text-gray-900 font-medium transition-all duration-300 border border-gray-100">
+                        <div class="w-9 h-9 rounded-lg bg-blue-100 flex items-center justify-center">
                             <svg class="w-5 h-5 text-blue-600" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 20h5v-2a3 3 0 00-5.356-1.857M17 20H7m10 0v-2c0-.656-.126-1.283-.356-1.857M7 20H2v-2a3 3 0 015.356-1.857M7 20v-2c0-.656.126-1.283.356-1.857m0 0a5.002 5.002 0 019.288 0M15 7a3 3 0 11-6 0 3 3 0 016 0z" />
-                            </svg>
-                        </div>
-                        <span>View Employees</span>
-                        <svg class="w-4 h-4 ml-auto opacity-0 group-hover:opacity-100 transition-opacity text-muted-foreground" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7" />
-                        </svg>
-                    </a>
-
-                    <a href="{{ route('employees.create') }}" class="flex items-center gap-4 p-4 rounded-xl bg-muted/50 hover:bg-muted text-foreground font-medium hover:shadow-md hover:-translate-y-0.5 transition-all duration-200 group border border-transparent hover:border-border">
-                        <div class="p-2 bg-green-100 rounded-lg">
-                            <svg class="w-5 h-5 text-green-600" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M18 9v3m0 0v3m0-3h3m-3 0h-3m-2-5a4 4 0 11-8 0 4 4 0 018 0zM3 20a6 6 0 0112 0v1H3v-1z" />
                             </svg>
                         </div>
                         <span>Add Employee</span>
-                        <svg class="w-4 h-4 ml-auto opacity-0 group-hover:opacity-100 transition-opacity text-muted-foreground" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7" />
-                        </svg>
                     </a>
-                </div>
-            </div>
-
-            <!-- Activity Timeline -->
-            <div class="mt-6 bg-white rounded-2xl border border-border shadow-sm overflow-hidden">
-                <div class="p-6 border-b border-border">
-                    <h3 class="text-lg font-semibold text-foreground">Recent Activity</h3>
-                    <p class="text-sm text-muted-foreground">What's happening now</p>
-                </div>
-                <div class="p-4">
-                    <div class="space-y-4">
-                        <div class="flex gap-3">
-                            <div class="flex-shrink-0 w-2 h-2 mt-2 rounded-full bg-green-500"></div>
-                            <div>
-                                <p class="text-sm text-foreground">System is running smoothly</p>
-                                <p class="text-xs text-muted-foreground">Just now</p>
-                            </div>
-                        </div>
-                        <div class="flex gap-3">
-                            <div class="flex-shrink-0 w-2 h-2 mt-2 rounded-full bg-blue-500"></div>
-                            <div>
-                                <p class="text-sm text-foreground">You logged in</p>
-                                <p class="text-xs text-muted-foreground">{{ now()->diffForHumans() }}</p>
-                            </div>
-                        </div>
-                    </div>
                 </div>
             </div>
         </div>
     </div>
 </div>
-
-<!-- Lottie Animation Container (optional) -->
-<div data-lottie="https://assets5.lottiefiles.com/packages/lf20_UJNc2t.json" class="fixed bottom-4 right-4 w-24 h-24 pointer-events-none opacity-50" style="display: none;"></div>
 @endsection

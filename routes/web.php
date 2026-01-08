@@ -5,6 +5,7 @@ use App\Http\Controllers\Auth\RegisterController;
 use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\DocumentController;
 use App\Http\Controllers\EmployeeController;
+use App\Http\Controllers\LandingController;
 use App\Http\Controllers\NoticeController;
 use Illuminate\Support\Facades\Route;
 
@@ -14,17 +15,15 @@ use Illuminate\Support\Facades\Route;
 |--------------------------------------------------------------------------
 */
 
+// Landing page (public)
+Route::get('/', [LandingController::class, 'index'])->name('landing');
+
 // Guest routes
 Route::middleware('guest')->group(function () {
     Route::get('/login', [LoginController::class, 'showLoginForm'])->name('login');
     Route::post('/login', [LoginController::class, 'login']);
     Route::get('/register', [RegisterController::class, 'showRegistrationForm'])->name('register');
     Route::post('/register', [RegisterController::class, 'register']);
-});
-
-// Public routes
-Route::get('/', function () {
-    return redirect()->route('dashboard');
 });
 
 // Authenticated routes
