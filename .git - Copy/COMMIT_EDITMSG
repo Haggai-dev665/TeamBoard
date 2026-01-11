@@ -1,0 +1,3 @@
+Add animated landing, login, and register pages
+
+Introduces a new LandingController and landing view, and replaces the login and register Blade templates with fully redesigned, animated pages featuring gradient backgrounds, Lottie animations, and interactive UI elements. Updates routes and layout to support the new landing page and improves the user experience for authentication flows.

@@ -1,0 +1,5 @@
+0000000000000000000000000000000000000000 614a4813733a555ca06ac698f5aa6955f8dca725 Haggai-dev665 <chehaggai14@gmail.com> 1766403623 +0100	clone: from https://github.com/Haggai-dev665/TeamBoard.git
+614a4813733a555ca06ac698f5aa6955f8dca725 8912915138f6d3b7adec41df3df2b33ed38e68fd Haggai-dev665 <chehaggai14@gmail.com> 1766705143 +0100	commit: database setup
+8912915138f6d3b7adec41df3df2b33ed38e68fd 76a2176a222cb2a652bccf36d489d600420a9eed Haggai-dev665 <chehaggai14@gmail.com> 1767350905 +0100	commit: Add registration, UI enhancements, and dashboard redesign
+76a2176a222cb2a652bccf36d489d600420a9eed 17292620ca6cbfa395a7d22b83425dece59bbc90 Haggai-dev665 <chehaggai14@gmail.com> 1767401172 +0100	commit: Redesign UI with new components and improved styles
+17292620ca6cbfa395a7d22b83425dece59bbc90 a9b6f9218009633d56b78beb7b561b1dd748d28a Haggai-dev665 <chehaggai14@gmail.com> 1767846038 -0600	commit: Add animated landing, login, and register pages

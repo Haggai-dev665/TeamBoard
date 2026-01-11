@@ -177,7 +177,7 @@
                 <div class="hidden md:flex items-center gap-8">
                     <a href="#features" class="text-muted-foreground hover:text-foreground transition-colors font-medium">Features</a>
                     <a href="#how-it-works" class="text-muted-foreground hover:text-foreground transition-colors font-medium">How it Works</a>
-                    <a href="#testimonials" class="text-muted-foreground hover:text-foreground transition-colors font-medium">Testimonials</a>
+                    <a href="#notice-system" class="text-muted-foreground hover:text-foreground transition-colors font-medium">Notice System</a>
                 </div>
                 
                 <!-- Auth Buttons -->
@@ -461,93 +461,250 @@
                 </div>
             </div>
             
-            <!-- Lottie Animation -->
-            <div class="mt-16 flex justify-center">
-                <lottie-player 
-                    src="https://assets9.lottiefiles.com/packages/lf20_xyadoh9h.json"
-                    background="transparent"
-                    speed="1"
-                    style="width: 400px; height: 300px;"
-                    loop
-                    autoplay>
-                </lottie-player>
+            <!-- Interactive Animation Section -->
+            <div class="mt-20 relative">
+                <!-- Center Lottie Animation -->
+                <div class="flex justify-center relative z-10">
+                    <lottie-player 
+                        src="https://assets9.lottiefiles.com/packages/lf20_xyadoh9h.json"
+                        background="transparent"
+                        speed="1"
+                        style="width: 500px; height: 400px;"
+                        loop
+                        autoplay>
+                    </lottie-player>
+                </div>
+                
+                <!-- Floating Feature Pills Around Animation -->
+                <div class="absolute top-12 left-[10%] animate-fade-in-left delay-200 float-animation">
+                    <div class="card-gradient rounded-full px-6 py-3 shadow-xl border border-white/50 flex items-center gap-3 hover:scale-105 transition-transform duration-300">
+                        <div class="w-10 h-10 rounded-full bg-gradient-to-br from-green-500 to-green-600 flex items-center justify-center flex-shrink-0">
+                            <svg class="w-5 h-5 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"></path>
+                            </svg>
+                        </div>
+                        <span class="font-semibold text-foreground whitespace-nowrap">Quick Setup</span>
+                    </div>
+                </div>
+                
+                <div class="absolute top-24 right-[12%] animate-fade-in-right delay-400 float-animation-delayed">
+                    <div class="card-gradient rounded-full px-6 py-3 shadow-xl border border-white/50 flex items-center gap-3 hover:scale-105 transition-transform duration-300">
+                        <div class="w-10 h-10 rounded-full bg-gradient-to-br from-blue-500 to-blue-600 flex items-center justify-center flex-shrink-0">
+                            <svg class="w-5 h-5 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 4.354a4 4 0 110 5.292M15 21H3v-1a6 6 0 0112 0v1zm0 0h6v-1a6 6 0 00-9-5.197M13 7a4 4 0 11-8 0 4 4 0 018 0z"></path>
+                            </svg>
+                        </div>
+                        <span class="font-semibold text-foreground whitespace-nowrap">Team Ready</span>
+                    </div>
+                </div>
+                
+                <div class="absolute bottom-20 left-[15%] animate-fade-in-up delay-600 float-animation">
+                    <div class="card-gradient rounded-full px-6 py-3 shadow-xl border border-white/50 flex items-center gap-3 hover:scale-105 transition-transform duration-300">
+                        <div class="w-10 h-10 rounded-full bg-gradient-to-br from-purple-500 to-purple-600 flex items-center justify-center flex-shrink-0">
+                            <svg class="w-5 h-5 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 10V3L4 14h7v7l9-11h-7z"></path>
+                            </svg>
+                        </div>
+                        <span class="font-semibold text-foreground whitespace-nowrap">Instant Access</span>
+                    </div>
+                </div>
+                
+                <div class="absolute bottom-16 right-[18%] animate-fade-in-up delay-800 float-animation-delayed">
+                    <div class="card-gradient rounded-full px-6 py-3 shadow-xl border border-white/50 flex items-center gap-3 hover:scale-105 transition-transform duration-300">
+                        <div class="w-10 h-10 rounded-full bg-gradient-to-br from-orange-500 to-orange-600 flex items-center justify-center flex-shrink-0">
+                            <svg class="w-5 h-5 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 15v2m-6 4h12a2 2 0 002-2v-6a2 2 0 00-2-2H6a2 2 0 00-2 2v6a2 2 0 002 2zm10-10V7a4 4 0 00-8 0v4h8z"></path>
+                            </svg>
+                        </div>
+                        <span class="font-semibold text-foreground whitespace-nowrap">Secure Setup</span>
+                    </div>
+                </div>
+                
+                <!-- Additional Corner Animations -->
+                <div class="absolute -top-8 -right-8 animate-fade-in-right">
+                    <lottie-player 
+                        src="https://assets4.lottiefiles.com/packages/lf20_touohxv0.json"
+                        background="transparent"
+                        speed="0.8"
+                        style="width: 120px; height: 120px;"
+                        loop
+                        autoplay>
+                    </lottie-player>
+                </div>
+                
+                <div class="absolute -bottom-8 -left-8 animate-fade-in-left">
+                    <lottie-player 
+                        src="https://assets2.lottiefiles.com/packages/lf20_y2hcf1zz.json"
+                        background="transparent"
+                        speed="0.8"
+                        style="width: 140px; height: 140px;"
+                        loop
+                        autoplay>
+                    </lottie-player>
+                </div>
+                
+                <!-- Stats Counter Below Animation -->
+                <div class="mt-16 grid grid-cols-2 md:grid-cols-4 gap-8 max-w-4xl mx-auto">
+                    <div class="text-center">
+                        <div class="text-4xl font-bold font-display gradient-text mb-2">2min</div>
+                        <div class="text-sm text-muted-foreground">Average Setup Time</div>
+                    </div>
+                    <div class="text-center">
+                        <div class="text-4xl font-bold font-display gradient-text mb-2">3</div>
+                        <div class="text-sm text-muted-foreground">Simple Steps</div>
+                    </div>
+                    <div class="text-center">
+                        <div class="text-4xl font-bold font-display gradient-text mb-2">0</div>
+                        <div class="text-sm text-muted-foreground">Credit Card Required</div>
+                    </div>
+                    <div class="text-center">
+                        <div class="text-4xl font-bold font-display gradient-text mb-2">100%</div>
+                        <div class="text-sm text-muted-foreground">Free to Start</div>
+                    </div>
+                </div>
             </div>
         </div>
     </section>
 
-    <!-- Testimonials Section -->
-    <section id="testimonials" class="py-20 lg:py-32 bg-background relative">
-        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-            <div class="text-center mb-16">
-                <span class="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-primary/10 text-sm font-medium text-primary mb-4">
-                    💬 Testimonials
-                </span>
-                <h2 class="text-3xl sm:text-4xl lg:text-5xl font-bold font-display text-foreground mb-4">
-                    Loved by Teams
-                    <span class="gradient-text">Everywhere</span>
-                </h2>
-            </div>
-            
-            <div class="grid md:grid-cols-3 gap-8">
-                <!-- Testimonial 1 -->
-                <div class="card-gradient rounded-3xl p-8 border border-white/50 shadow-xl">
-                    <div class="flex items-center gap-1 mb-4">
-                        <?php for($i = 0; $i < 5; $i++): ?>
-                            <svg class="w-5 h-5 text-yellow-400 fill-current" viewBox="0 0 24 24">
-                                <path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/>
-                            </svg>
-                        <?php endfor; ?>
-                    </div>
-                    <p class="text-foreground mb-6 leading-relaxed">
-                        "TeamBoard transformed how we manage our remote team. The notice board feature alone has saved us countless hours of email chains."
+    <!-- Notice System Showcase Section -->
+    <section id="notice-system" class="py-20 lg:py-32 bg-background relative overflow-hidden">
+        <!-- Background decoration -->
+        <div class="absolute top-0 left-0 w-96 h-96 bg-purple-500/10 rounded-full blur-3xl"></div>
+        <div class="absolute bottom-0 right-0 w-96 h-96 bg-amber-500/10 rounded-full blur-3xl"></div>
+        
+        <div class="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="grid lg:grid-cols-2 gap-12 lg:gap-16 items-center">
+                <!-- Left Content -->
+                <div>
+                    <span class="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-purple-100 text-sm font-medium text-purple-700 mb-6">
+                        📢 Notice System
+                    </span>
+                    <h2 class="text-3xl sm:text-4xl lg:text-5xl font-bold font-display text-foreground mb-6">
+                        Keep Your Team
+                        <span class="gradient-text block">Informed & Aligned</span>
+                    </h2>
+                    <p class="text-lg text-muted-foreground mb-8 leading-relaxed">
+                        TeamBoard's powerful notice system ensures critical information reaches the right people at the right time. Say goodbye to endless email chains and missed announcements.
                     </p>
-                    <div class="flex items-center gap-3">
-                        <img src="https://images.unsplash.com/photo-1494790108377-be9c29b29330?w=100&h=100&fit=crop&crop=face" alt="Sarah" class="w-12 h-12 rounded-full object-cover">
-                        <div>
-                            <p class="font-semibold text-foreground">Sarah Johnson</p>
-                            <p class="text-sm text-muted-foreground">HR Manager, TechCorp</p>
+                    
+                    <!-- Features List -->
+                    <div class="space-y-6">
+                        <div class="flex items-start gap-4">
+                            <div class="w-12 h-12 rounded-xl bg-gradient-to-br from-red-500 to-red-600 flex items-center justify-center flex-shrink-0 shadow-lg">
+                                <svg class="w-6 h-6 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 9v2m0 4h.01m-6.938 4h13.856c1.54 0 2.502-1.667 1.732-3L13.732 4c-.77-1.333-2.694-1.333-3.464 0L3.34 16c-.77 1.333.192 3 1.732 3z"></path>
+                                </svg>
+                            </div>
+                            <div>
+                                <h3 class="font-bold text-foreground mb-2">Priority Levels</h3>
+                                <p class="text-muted-foreground">Mark notices as high, medium, or low priority so urgent messages stand out and get immediate attention.</p>
+                            </div>
                         </div>
+                        
+                        <div class="flex items-start gap-4">
+                            <div class="w-12 h-12 rounded-xl bg-gradient-to-br from-blue-500 to-blue-600 flex items-center justify-center flex-shrink-0 shadow-lg">
+                                <svg class="w-6 h-6 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 20h5v-2a3 3 0 00-5.356-1.857M17 20H7m10 0v-2c0-.656-.126-1.283-.356-1.857M7 20H2v-2a3 3 0 015.356-1.857M7 20v-2c0-.656.126-1.283.356-1.857m0 0a5.002 5.002 0 019.288 0M15 7a3 3 0 11-6 0 3 3 0 016 0z"></path>
+                                </svg>
+                            </div>
+                            <div>
+                                <h3 class="font-bold text-foreground mb-2">Department Targeting</h3>
+                                <p class="text-muted-foreground">Send announcements to specific departments or broadcast to the entire organization with a single click.</p>
+                            </div>
+                        </div>
+                        
+                        <div class="flex items-start gap-4">
+                            <div class="w-12 h-12 rounded-xl bg-gradient-to-br from-green-500 to-green-600 flex items-center justify-center flex-shrink-0 shadow-lg">
+                                <svg class="w-6 h-6 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"></path>
+                                </svg>
+                            </div>
+                            <div>
+                                <h3 class="font-bold text-foreground mb-2">Read Receipts</h3>
+                                <p class="text-muted-foreground">Track who has viewed important notices and get real-time confirmation that your message was received.</p>
+                            </div>
+                        </div>
+                        
+                        <div class="flex items-start gap-4">
+                            <div class="w-12 h-12 rounded-xl bg-gradient-to-br from-purple-500 to-purple-600 flex items-center justify-center flex-shrink-0 shadow-lg">
+                                <svg class="w-6 h-6 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 17h5l-1.405-1.405A2.032 2.032 0 0118 14.158V11a6.002 6.002 0 00-4-5.659V5a2 2 0 10-4 0v.341C7.67 6.165 6 8.388 6 11v3.159c0 .538-.214 1.055-.595 1.436L4 17h5m6 0v1a3 3 0 11-6 0v-1m6 0H9"></path>
+                                </svg>
+                            </div>
+                            <div>
+                                <h3 class="font-bold text-foreground mb-2">Smart Notifications</h3>
+                                <p class="text-muted-foreground">Automatic alerts ensure no one misses critical updates, with customizable notification preferences.</p>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="mt-10">
+                        <a href="<?php echo e(route('register')); ?>" class="inline-flex items-center gap-2 px-8 py-4 rounded-xl bg-gradient-to-r from-primary to-accent text-white font-semibold shadow-xl hover:shadow-2xl hover:-translate-y-1 transition-all duration-300">
+                            Try Notice System Now
+                            <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 7l5 5m0 0l-5 5m5-5H6"></path>
+                            </svg>
+                        </a>
                     </div>
                 </div>
                 
-                <!-- Testimonial 2 -->
-                <div class="card-gradient rounded-3xl p-8 border border-white/50 shadow-xl">
-                    <div class="flex items-center gap-1 mb-4">
-                        <?php for($i = 0; $i < 5; $i++): ?>
-                            <svg class="w-5 h-5 text-yellow-400 fill-current" viewBox="0 0 24 24">
-                                <path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/>
-                            </svg>
-                        <?php endfor; ?>
+                <!-- Right Illustration -->
+                <div class="relative">
+                    <!-- Main Lottie Animation -->
+                    <div class="relative z-10 float-animation">
+                        <lottie-player 
+                            src="https://assets10.lottiefiles.com/packages/lf20_z9ed2jna.json"
+                            background="transparent"
+                            speed="1"
+                            style="width: 100%; height: 500px;"
+                            loop
+                            autoplay>
+                        </lottie-player>
                     </div>
-                    <p class="text-foreground mb-6 leading-relaxed">
-                        "The employee directory is incredibly useful. Finding contact information and department details has never been easier."
-                    </p>
-                    <div class="flex items-center gap-3">
-                        <img src="https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=100&h=100&fit=crop&crop=face" alt="Michael" class="w-12 h-12 rounded-full object-cover">
-                        <div>
-                            <p class="font-semibold text-foreground">Michael Chen</p>
-                            <p class="text-sm text-muted-foreground">CEO, StartupXYZ</p>
+                    
+                    <!-- Floating Notice Cards -->
+                    <div class="absolute top-12 -left-8 card-gradient rounded-2xl p-4 shadow-2xl border border-white/50 max-w-xs animate-fade-in-left delay-200 float-animation">
+                        <div class="flex items-start gap-3">
+                            <div class="w-10 h-10 rounded-full bg-gradient-to-br from-red-500 to-red-600 flex items-center justify-center flex-shrink-0">
+                                <svg class="w-5 h-5 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 9v2m0 4h.01m-6.938 4h13.856c1.54 0 2.502-1.667 1.732-3L13.732 4c-.77-1.333-2.694-1.333-3.464 0L3.34 16c-.77 1.333.192 3 1.732 3z"></path>
+                                </svg>
+                            </div>
+                            <div class="flex-1">
+                                <span class="inline-block px-2 py-0.5 text-xs font-semibold text-red-700 bg-red-100 rounded-full mb-2">HIGH PRIORITY</span>
+                                <p class="text-sm font-semibold text-foreground">Emergency Team Meeting</p>
+                                <p class="text-xs text-muted-foreground mt-1">Scheduled for 3 PM today</p>
+                            </div>
                         </div>
                     </div>
-                </div>
-                
-                <!-- Testimonial 3 -->
-                <div class="card-gradient rounded-3xl p-8 border border-white/50 shadow-xl">
-                    <div class="flex items-center gap-1 mb-4">
-                        <?php for($i = 0; $i < 5; $i++): ?>
-                            <svg class="w-5 h-5 text-yellow-400 fill-current" viewBox="0 0 24 24">
-                                <path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/>
-                            </svg>
-                        <?php endfor; ?>
+                    
+                    <div class="absolute top-1/2 -right-8 card-gradient rounded-2xl p-4 shadow-2xl border border-white/50 max-w-xs animate-fade-in-right delay-400 float-animation-delayed">
+                        <div class="flex items-start gap-3">
+                            <div class="w-10 h-10 rounded-full bg-gradient-to-br from-blue-500 to-blue-600 flex items-center justify-center flex-shrink-0">
+                                <svg class="w-5 h-5 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"></path>
+                                </svg>
+                            </div>
+                            <div class="flex-1">
+                                <span class="inline-block px-2 py-0.5 text-xs font-semibold text-blue-700 bg-blue-100 rounded-full mb-2">INFO</span>
+                                <p class="text-sm font-semibold text-foreground">New Benefits Package</p>
+                                <p class="text-xs text-muted-foreground mt-1">Review by end of week</p>
+                            </div>
+                        </div>
                     </div>
-                    <p class="text-foreground mb-6 leading-relaxed">
-                        "Document sharing with proper access control was exactly what we needed. TeamBoard keeps everything organized and secure."
-                    </p>
-                    <div class="flex items-center gap-3">
-                        <img src="https://images.unsplash.com/photo-1438761681033-6461ffad8d80?w=100&h=100&fit=crop&crop=face" alt="Emily" class="w-12 h-12 rounded-full object-cover">
-                        <div>
-                            <p class="font-semibold text-foreground">Emily Rodriguez</p>
-                            <p class="text-sm text-muted-foreground">Operations Lead, Agency</p>
+                    
+                    <div class="absolute bottom-12 left-12 card-gradient rounded-2xl p-4 shadow-2xl border border-white/50 max-w-xs animate-fade-in-up delay-600 float-animation">
+                        <div class="flex items-start gap-3">
+                            <div class="w-10 h-10 rounded-full bg-gradient-to-br from-green-500 to-green-600 flex items-center justify-center flex-shrink-0">
+                                <svg class="w-5 h-5 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"></path>
+                                </svg>
+                            </div>
+                            <div class="flex-1">
+                                <span class="inline-block px-2 py-0.5 text-xs font-semibold text-green-700 bg-green-100 rounded-full mb-2">COMPLETED</span>
+                                <p class="text-sm font-semibold text-foreground">Q4 Goals Achieved! 🎉</p>
+                                <p class="text-xs text-muted-foreground mt-1">Great work team!</p>
+                            </div>
                         </div>
                     </div>
                 </div>
