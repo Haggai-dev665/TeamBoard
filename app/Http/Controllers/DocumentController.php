@@ -51,12 +51,15 @@ class DocumentController extends Controller
         $filename = $file->getClientOriginalName();
         $filepath = $file->store('documents', 'public');
 
-        Document::create([
+        $document = Document::create([
             'title' => $validated['title'],
             'filename' => $filename,
             'filepath' => $filepath,
             'uploader_id' => auth()->id(),
         ]);
+
+        // Create notifications for all users
+        \App\Services\NotificationService::notifyNewDocument($document);
 
         return redirect()->route('documents.index')->with('success', 'Document uploaded successfully.');
     }

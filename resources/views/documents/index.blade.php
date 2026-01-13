@@ -136,6 +136,15 @@
                                 </div>
                             </x-table-cell>
                         </x-table-row>
+                        
+                        <!-- Feedback Row -->
+                        @if(!auth()->user()->isSuperAdmin())
+                            <x-table-row>
+                                <x-table-cell colspan="5" class="bg-gray-50/50 p-4">
+                                    <x-feedback :item="$document" type="document" />
+                                </x-table-cell>
+                            </x-table-row>
+                        @endif
                     @endforeach
                 </x-table-body>
             </x-table>

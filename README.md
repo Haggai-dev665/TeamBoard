@@ -1,4 +1,4 @@
-# 📋 TeamBoard - Internal Announcement System
+# 📋 TeamBoard
 
 <div align="center">
 
@@ -8,9 +8,9 @@
 ![TailwindCSS](https://img.shields.io/badge/Tailwind-3.4-38B2AC?style=for-the-badge&logo=tailwind-css&logoColor=white)
 ![MySQL](https://img.shields.io/badge/MySQL-8.0-4479A1?style=for-the-badge&logo=mysql&logoColor=white)
 
-**A modern, lightweight employee directory and notice board system built with Laravel**
+**An internal team hub for employees, notices, documents, notifications, and feedback — built with Laravel**
 
-[Features](#-features) • [Installation](#-installation) • [Usage](#-usage) • [Architecture](#-architecture) • [Screenshots](#-screenshots)
+[Features](#-features) • [Installation](#-installation) • [Architecture](#-architecture) • [Screenshots](#-screenshots)
 
 </div>
 
@@ -41,12 +41,15 @@
 
 ### Key Highlights
 
-- 🔐 **Secure Authentication** - Role-based access control (Admin/User)
-- 👥 **Employee Directory** - Searchable employee profiles with photos
+- 🔐 **Secure Authentication** - Login/registration with protected routes
+- 🧑‍💼 **Super Admin Dashboard** - Special dashboard for organization-wide oversight
+- 👥 **Employee Directory** - Searchable employee records
 - 📢 **Notice Board** - Priority-based announcements
-- 📁 **Document Library** - Centralized file sharing
-- 🎨 **Modern UI** - Beautiful, responsive design with Tailwind CSS
-- ⚡ **Fast & Lightweight** - Optimized Laravel backend
+- 📁 **Document Library** - Centralized file sharing (upload/download)
+- 🔔 **Notifications** - Real, stored notifications with unread counts
+- 💬 **Feedback on Content** - Acknowledge / Disagree / Concern (with attachment)
+- ⚙️ **Settings** - Profile + password management
+- 🎨 **Modern UI** - Tailwind CSS + Alpine.js
 
 ---
 
@@ -77,11 +80,12 @@
 - ✅ Authorization policies
 - ✅ Unit and feature tests
 
-### Phase 5: Advanced Features (Weeks 13-15)
-- ✅ Document sharing system
-- ✅ File upload/download
-- ✅ Admin panel
-- ✅ User management
+### Phase 5: Advanced Features
+- ✅ Document sharing system (upload/download)
+- ✅ Real notifications system (welcome, new notice, new document, employee added)
+- ✅ Feedback on notices/documents (acknowledge/disagree/concern + optional attachment)
+- ✅ Super-admin escalation (concerns notify super admin)
+- ✅ Settings page (profile + password)
 
 ---
 
@@ -231,6 +235,21 @@ Visit: `http://localhost:8000`
 │ created_at      │  │ created_at       │
 │ updated_at      │  │ updated_at       │
 └─────────────────┘  └──────────────────┘
+
+┌──────────────────┐         ┌──────────────────┐
+│  Notifications    │         │     Feedback     │
+├──────────────────┤         ├──────────────────┤
+│ id (PK)           │         │ id (PK)          │
+│ user_id (FK)      │         │ user_id (FK)     │
+│ type              │         │ feedbackable_*   │
+│ title             │         │ type             │
+│ message           │         │ message          │
+│ icon              │         │ attachment       │
+│ link              │         │ created_at       │
+│ read              │         │ updated_at       │
+│ created_at        │         └──────────────────┘
+│ updated_at        │
+└──────────────────┘
 ```
 
 ### Table Specifications
@@ -278,6 +297,33 @@ Visit: `http://localhost:8000`
 | filename | VARCHAR(255) | NOT NULL |
 | filepath | VARCHAR(255) | NOT NULL |
 | uploader_id | BIGINT | FOREIGN KEY → users.id |
+| created_at | TIMESTAMP | |
+| updated_at | TIMESTAMP | |
+
+#### **notifications**
+| Column | Type | Attributes |
+|--------|------|------------|
+| id | BIGINT | PRIMARY KEY, AUTO_INCREMENT |
+| user_id | BIGINT | FOREIGN KEY → users.id |
+| type | VARCHAR(50) | NOT NULL |
+| title | VARCHAR(255) | NOT NULL |
+| message | TEXT | NOT NULL |
+| icon | VARCHAR(50) | NULLABLE |
+| link | VARCHAR(255) | NULLABLE |
+| read | BOOLEAN | DEFAULT false |
+| created_at | TIMESTAMP | |
+| updated_at | TIMESTAMP | |
+
+#### **feedback**
+| Column | Type | Attributes |
+|--------|------|------------|
+| id | BIGINT | PRIMARY KEY, AUTO_INCREMENT |
+| user_id | BIGINT | FOREIGN KEY → users.id |
+| feedbackable_type | VARCHAR(255) | Morph type (Notice/Document) |
+| feedbackable_id | BIGINT | Morph id |
+| type | ENUM('acknowledge','disagree','concern') | NOT NULL |
+| message | TEXT | NULLABLE |
+| attachment | VARCHAR(255) | NULLABLE |
 | created_at | TIMESTAMP | |
 | updated_at | TIMESTAMP | |
 
@@ -402,21 +448,19 @@ TeamBoard/
 
 ## 👥 User Roles
 
-### Admin
-- ✅ Full access to all features
-- ✅ Create/Edit/Delete employees
-- ✅ Create/Edit/Delete all notices
-- ✅ Delete any documents
-- ✅ Access admin panel
-- ✅ User management
+### Super Admin
+- ✅ Uses the same login page as users
+- ✅ Sees a dedicated super-admin dashboard
+- ✅ Can review all feedback (especially concerns)
+- ✅ Receives notifications when concerns are raised
 
 ### User
-- ✅ View employees
-- ✅ Create notices
-- ✅ Edit/Delete own notices
-- ✅ Upload documents
-- ✅ Delete own documents
-- ✅ Download all documents
+- ✅ Employee directory (browse/search)
+- ✅ Notices (create + manage own; view all)
+- ✅ Documents (upload, download; delete own)
+- ✅ Feedback on notices/documents (acknowledge/disagree/concern)
+- ✅ Notifications dropdown (real data + mark-as-read)
+- ✅ Settings (profile + password)
 
 ---
 
@@ -463,6 +507,26 @@ GET    /documents/create  - Show upload form
 POST   /documents         - Upload document
 GET    /documents/{id}/download - Download document
 DELETE /documents/{id}    - Delete document (Owner/Admin)
+```
+
+### Notifications
+```
+GET  /notifications                 - List notifications
+POST /notifications/{id}/read       - Mark one as read
+POST /notifications/mark-all-read   - Mark all as read
+```
+
+### Feedback
+```
+POST /feedback                      - Submit feedback (acknowledge/disagree/concern)
+GET  /feedback                      - Super admin feedback overview
+```
+
+### Settings
+```
+GET  /settings                      - Settings page
+POST /settings/profile              - Update profile
+POST /settings/password             - Update password
 ```
 
 ---
@@ -537,14 +601,8 @@ php artisan test --coverage
 ```
 tests/
 ├── Feature/
-│   ├── AuthenticationTest.php
-│   ├── EmployeeTest.php
-│   ├── NoticeTest.php
-│   └── DocumentTest.php
-└── Unit/
-    ├── UserTest.php
-    ├── EmployeeTest.php
-    └── NoticeTest.php
+│   └── AuthenticationTest.php
+└── TestCase.php
 ```
 
 ---
@@ -564,6 +622,12 @@ tests/
 - [ ] Configure web server
 - [ ] Enable HTTPS
 - [ ] Set up backups
+
+### Shared Hosting (Important)
+
+- Remove the Vite dev-server indicator file: delete `public/hot` (and ensure it does not exist in production).
+- Upload built assets: upload `public/build/` to your production web root (same level as `index.php`).
+- Upload static assets: upload `public/assets/` to your production web root.
 
 ### Server Configuration
 
@@ -607,17 +671,35 @@ server {
 
 ## 📸 Screenshots
 
-### Dashboard
-![Dashboard showing statistics and recent notices]
+Add your screenshots into `docs/screenshots/` using these filenames (then they will render below):
 
-### Employee Directory
-![Grid view of employee cards with search functionality]
+### Landing
+![Landing](docs/screenshots/landing.png)
 
-### Notice Board
-![List of announcements with priority badges]
+### Login
+![Login](docs/screenshots/login.png)
 
-### Document Library
-![Table view of shared documents with download options]
+### User Dashboard
+![User Dashboard](docs/screenshots/dashboard-user.png)
+
+### Super Admin Dashboard
+![Super Admin Dashboard](docs/screenshots/dashboard-admin.png)
+
+### Notices + Feedback
+![Notices](docs/screenshots/notices.png)
+![Notice Feedback](docs/screenshots/notice-feedback.png)
+
+### Documents + Feedback
+![Documents](docs/screenshots/documents.png)
+
+### Notifications
+![Notifications](docs/screenshots/notifications.png)
+
+### Settings
+![Settings](docs/screenshots/settings.png)
+
+### Feedback (Admin Overview)
+![Feedback Admin](docs/screenshots/feedback-admin.png)
 
 ---
 
@@ -640,8 +722,7 @@ server {
 
 ### Typography
 
-- **Font Family**: Inter (Google Fonts)
-- **Font Weights**: 400 (Regular), 500 (Medium), 600 (Semibold), 700 (Bold)
+- **Font Family**: Raleway + Space Grotesk (Google Fonts)
 
 ### Components
 

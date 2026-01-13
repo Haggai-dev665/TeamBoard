@@ -54,7 +54,10 @@ class NoticeController extends Controller
 
         $validated['author_id'] = auth()->id();
 
-        Notice::create($validated);
+        $notice = Notice::create($validated);
+
+        // Create notifications for all users
+        \App\Services\NotificationService::notifyNewNotice($notice);
 
         return redirect()->route('notices.index')->with('success', 'Notice created successfully.');
     }

@@ -39,10 +39,17 @@ class EmployeeController extends Controller
     /**
      * Show the form for creating a new employee
      */
-    public function create()
+    public function create(Request $request)
     {
         $this->authorize('create', Employee::class);
-        return view('employees.create');
+        
+        // Pre-fill from query parameters
+        $prefill = [
+            'email' => $request->query('email'),
+            'name' => $request->query('name'),
+        ];
+        
+        return view('employees.create', compact('prefill'));
     }
 
     /**
@@ -65,7 +72,10 @@ class EmployeeController extends Controller
             $validated['photo'] = $request->file('photo')->store('employees', 'public');
         }
 
-        Employee::create($validated);
+        $employee = Employee::create($validated);
+
+        // Create notification if user exists
+        \App\Services\NotificationService::notifyEmployeeAdded($employee);
 
         return redirect()->route('employees.index')->with('success', 'Employee created successfully.');
     }

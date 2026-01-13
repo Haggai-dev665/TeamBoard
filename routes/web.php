@@ -5,8 +5,11 @@ use App\Http\Controllers\Auth\RegisterController;
 use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\DocumentController;
 use App\Http\Controllers\EmployeeController;
+use App\Http\Controllers\FeedbackController;
 use App\Http\Controllers\LandingController;
 use App\Http\Controllers\NoticeController;
+use App\Http\Controllers\NotificationController;
+use App\Http\Controllers\SettingsController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -34,20 +37,27 @@ Route::middleware('auth')->group(function () {
     // Dashboard
     Route::get('/dashboard', [DashboardController::class, 'index'])->name('dashboard');
     
-    // Employees
+    // Employees - accessible to all authenticated users
     Route::resource('employees', EmployeeController::class);
     
-    // Notices
+    // Notices - accessible to all authenticated users
     Route::resource('notices', NoticeController::class);
     
-    // Documents
+    // Documents - accessible to all authenticated users
     Route::resource('documents', DocumentController::class)->except(['show', 'edit', 'update']);
     Route::get('/documents/{document}/download', [DocumentController::class, 'download'])->name('documents.download');
     
-    // Admin routes
-    Route::prefix('admin')->name('admin.')->middleware('can:admin')->group(function () {
-        Route::get('/', function () {
-            return view('admin.index');
-        })->name('index');
-    });
+    // Notifications
+    Route::get('/notifications', [NotificationController::class, 'index'])->name('notifications.index');
+    Route::post('/notifications/{notification}/read', [NotificationController::class, 'markAsRead'])->name('notifications.mark-read');
+    Route::post('/notifications/mark-all-read', [NotificationController::class, 'markAllAsRead'])->name('notifications.mark-all-read');
+    
+    // Feedback
+    Route::post('/feedback', [FeedbackController::class, 'store'])->name('feedback.store');
+    Route::get('/feedback', [FeedbackController::class, 'index'])->name('feedback.index');
+    
+    // Settings
+    Route::get('/settings', [SettingsController::class, 'index'])->name('settings.index');
+    Route::post('/settings/profile', [SettingsController::class, 'updateProfile'])->name('settings.profile');
+    Route::post('/settings/password', [SettingsController::class, 'updatePassword'])->name('settings.password');
 });

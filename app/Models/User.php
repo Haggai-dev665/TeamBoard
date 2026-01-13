@@ -48,11 +48,35 @@ class User extends Authenticatable
     }
 
     /**
+     * Check if user is a super admin
+     */
+    public function isSuperAdmin(): bool
+    {
+        return $this->email === config('app.super_admin_email');
+    }
+
+    /**
      * Check if user is an admin
      */
     public function isAdmin(): bool
     {
-        return $this->role === 'admin';
+        return $this->role === 'admin' || $this->isSuperAdmin();
+    }
+
+    /**
+     * Check if user has an employee record
+     */
+    public function isEmployee(): bool
+    {
+        return $this->isSuperAdmin() || $this->employee()->exists();
+    }
+
+    /**
+     * Get the employee record for this user
+     */
+    public function employee()
+    {
+        return $this->hasOne(Employee::class, 'email', 'email');
     }
 
     /**
@@ -69,5 +93,21 @@ class User extends Authenticatable
     public function documents()
     {
         return $this->hasMany(Document::class, 'uploader_id');
+    }
+
+    /**
+     * Get the notifications for the user
+     */
+    public function notifications()
+    {
+        return $this->hasMany(Notification::class)->latest();
+    }
+
+    /**
+     * Get unread notifications count
+     */
+    public function unreadNotificationsCount()
+    {
+        return $this->notifications()->unread()->count();
     }
 }

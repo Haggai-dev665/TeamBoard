@@ -31,6 +31,23 @@ class Document extends Model
     }
 
     /**
+     * Get all feedback for this document
+     */
+    public function feedback()
+    {
+        return $this->morphMany(Feedback::class, 'feedbackable');
+    }
+
+    /**
+     * Get user's feedback for this document
+     */
+    public function userFeedback($userId = null)
+    {
+        $userId = $userId ?? auth()->id();
+        return $this->feedback()->where('user_id', $userId)->first();
+    }
+
+    /**
      * Get the file size in human-readable format
      */
     public function getFileSizeAttribute(): string

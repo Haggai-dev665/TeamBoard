@@ -30,6 +30,23 @@ class Notice extends Model
     }
 
     /**
+     * Get all feedback for this notice
+     */
+    public function feedback()
+    {
+        return $this->morphMany(Feedback::class, 'feedbackable');
+    }
+
+    /**
+     * Get user's feedback for this notice
+     */
+    public function userFeedback($userId = null)
+    {
+        $userId = $userId ?? auth()->id();
+        return $this->feedback()->where('user_id', $userId)->first();
+    }
+
+    /**
      * Get the priority badge color
      */
     public function getPriorityColorAttribute(): string

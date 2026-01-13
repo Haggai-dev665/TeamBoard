@@ -6,6 +6,11 @@
     <meta name="csrf-token" content="<?php echo e(csrf_token()); ?>">
 
     <title><?php echo e(config('app.name', 'TeamBoard')); ?> - <?php echo $__env->yieldContent('title', 'Dashboard'); ?></title>
+    
+    <!-- Favicon -->
+    <link rel="icon" type="image/png" href="/assets/logo.png?v=1">
+    <link rel="shortcut icon" type="image/png" href="/assets/logo.png?v=1">
+    <link rel="apple-touch-icon" href="/assets/logo.png?v=1">
 
     <!-- Fonts -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -290,22 +295,18 @@
                     <span>Documents</span>
                 </a>
                 
-                <?php if(auth()->guard()->check()): ?>
-                    <?php if(auth()->user()->isAdmin()): ?>
-                        <div class="pt-6 mt-6 border-t border-gray-100">
-                            <p class="px-3 mb-3 text-xs font-semibold text-gray-400 uppercase tracking-wider">Admin</p>
-                            <a href="<?php echo e(route('admin.index')); ?>" class="sidebar-nav-link <?php echo e(request()->routeIs('admin.*') ? 'active' : ''); ?>">
-                                <div class="w-9 h-9 rounded-lg bg-gradient-to-br from-rose-100 to-rose-50 flex items-center justify-center">
-                                    <svg class="w-5 h-5 text-rose-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10.325 4.317c.426-1.756 2.924-1.756 3.35 0a1.724 1.724 0 002.573 1.066c1.543-.94 3.31.826 2.37 2.37a1.724 1.724 0 001.065 2.572c1.756.426 1.756 2.924 0 3.35a1.724 1.724 0 00-1.066 2.573c.94 1.543-.826 3.31-2.37 2.37a1.724 1.724 0 00-2.572 1.065c-.426 1.756-2.924 1.756-3.35 0a1.724 1.724 0 00-2.573-1.066c-1.543.94-3.31-.826-2.37-2.37a1.724 1.724 0 00-1.065-2.572c-1.756-.426-1.756-2.924 0-3.35a1.724 1.724 0 001.066-2.573c-.94-1.543.826-3.31 2.37-2.37.996.608 2.296.07 2.572-1.065z"></path>
-                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 12a3 3 0 11-6 0 3 3 0 016 0z"></path>
-                                    </svg>
-                                </div>
-                                <span>Settings</span>
-                            </a>
+                <!-- Settings for all users -->
+                <div class="pt-6 mt-6 border-t border-gray-100">
+                    <a href="<?php echo e(route('settings.index')); ?>" class="sidebar-nav-link <?php echo e(request()->routeIs('settings.*') ? 'active' : ''); ?>">
+                        <div class="w-9 h-9 rounded-lg bg-gradient-to-br from-blue-100 to-blue-50 flex items-center justify-center">
+                            <svg class="w-5 h-5 text-blue-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10.325 4.317c.426-1.756 2.924-1.756 3.35 0a1.724 1.724 0 002.573 1.066c1.543-.94 3.31.826 2.37 2.37a1.724 1.724 0 001.065 2.572c1.756.426 1.756 2.924 0 3.35a1.724 1.724 0 00-1.066 2.573c.94 1.543-.826 3.31-2.37 2.37a1.724 1.724 0 00-2.572 1.065c-.426 1.756-2.924 1.756-3.35 0a1.724 1.724 0 00-2.573-1.066c-1.543.94-3.31-.826-2.37-2.37a1.724 1.724 0 00-1.065-2.572c-1.756-.426-1.756-2.924 0-3.35a1.724 1.724 0 001.066-2.573c-.94-1.543.826-3.31 2.37-2.37.996.608 2.296.07 2.572-1.065z"></path>
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 12a3 3 0 11-6 0 3 3 0 016 0z"></path>
+                            </svg>
                         </div>
-                    <?php endif; ?>
-                <?php endif; ?>
+                        <span>Settings</span>
+                    </a>
+                </div>
             </nav>
             
             <!-- User Section -->
@@ -399,12 +400,64 @@
                         </button>
                         
                         <!-- Notifications -->
-                        <button class="relative p-2.5 rounded-xl hover:bg-gray-100 transition-all duration-200 group">
-                            <svg class="w-6 h-6 text-gray-600 group-hover:text-gray-900 transition-colors" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 17h5l-1.405-1.405A2.032 2.032 0 0118 14.158V11a6.002 6.002 0 00-4-5.659V5a2 2 0 10-4 0v.341C7.67 6.165 6 8.388 6 11v3.159c0 .538-.214 1.055-.595 1.436L4 17h5m6 0v1a3 3 0 11-6 0v-1m6 0H9"></path>
-                            </svg>
-                            <span class="notification-badge">3</span>
-                        </button>
+                        <div x-data="{ open: false }" class="relative">
+                            <button @click="open = !open" class="relative p-2.5 rounded-xl hover:bg-gray-100 transition-all duration-200 group">
+                                <svg class="w-6 h-6 text-gray-600 group-hover:text-gray-900 transition-colors" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 17h5l-1.405-1.405A2.032 2.032 0 0118 14.158V11a6.002 6.002 0 00-4-5.659V5a2 2 0 10-4 0v.341C7.67 6.165 6 8.388 6 11v3.159c0 .538-.214 1.055-.595 1.436L4 17h5m6 0v1a3 3 0 11-6 0v-1m6 0H9"></path>
+                                </svg>
+                                <?php
+                                    $unreadCount = auth()->user()->unreadNotificationsCount();
+                                ?>
+                                <?php if($unreadCount > 0): ?>
+                                    <span class="notification-badge"><?php echo e($unreadCount); ?></span>
+                                <?php endif; ?>
+                            </button>
+
+                            <!-- Notifications Dropdown -->
+                            <div x-show="open"
+                                 x-transition:enter="transition ease-out duration-200"
+                                 x-transition:enter-start="opacity-0 scale-95 -translate-y-2"
+                                 x-transition:enter-end="opacity-100 scale-100 translate-y-0"
+                                 x-transition:leave="transition ease-in duration-150"
+                                 x-transition:leave-start="opacity-100 scale-100 translate-y-0"
+                                 x-transition:leave-end="opacity-0 scale-95 -translate-y-2"
+                                 @click.away="open = false"
+                                 class="absolute right-0 mt-2 w-96 bg-white rounded-xl shadow-xl border border-gray-100 overflow-hidden">
+                                <div class="flex items-center justify-between px-4 py-3 border-b border-gray-100">
+                                    <h3 class="font-semibold text-gray-900">Notifications</h3>
+                                    <?php if($unreadCount > 0): ?>
+                                        <form action="<?php echo e(route('notifications.mark-all-read')); ?>" method="POST" class="inline">
+                                            <?php echo csrf_field(); ?>
+                                            <button type="submit" class="text-xs text-primary hover:text-primary/80 font-medium">Mark all read</button>
+                                        </form>
+                                    <?php endif; ?>
+                                </div>
+                                <div class="max-h-96 overflow-y-auto">
+                                    <?php $__empty_1 = true; $__currentLoopData = auth()->user()->notifications()->take(10)->get(); $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $notification): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); $__empty_1 = false; ?>
+                                        <a href="<?php echo e($notification->link ?? '#'); ?>" 
+                                           onclick="event.preventDefault(); markAsRead(<?php echo e($notification->id); ?>, '<?php echo e($notification->link ?? '#'); ?>')"
+                                           class="flex items-start gap-3 px-4 py-3 hover:bg-gray-50 transition-colors <?php echo e($notification->read ? 'opacity-60' : 'bg-blue-50/30'); ?> border-b border-gray-50 last:border-b-0">
+                                            <div class="text-2xl mt-1"><?php echo e($notification->icon); ?></div>
+                                            <div class="flex-1 min-w-0">
+                                                <p class="text-sm font-medium text-gray-900 mb-1"><?php echo e($notification->title); ?></p>
+                                                <p class="text-xs text-gray-600 line-clamp-2"><?php echo e($notification->message); ?></p>
+                                                <p class="text-xs text-gray-400 mt-1"><?php echo e($notification->created_at->diffForHumans()); ?></p>
+                                            </div>
+                                            <?php if(!$notification->read): ?>
+                                                <div class="w-2 h-2 rounded-full bg-primary mt-2"></div>
+                                            <?php endif; ?>
+                                        </a>
+                                    <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); if ($__empty_1): ?>
+                                        <div class="px-4 py-8 text-center text-gray-500">
+                                            <svg class="w-12 h-12 mx-auto mb-3 text-gray-300" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 17h5l-1.405-1.405A2.032 2.032 0 0118 14.158V11a6.002 6.002 0 00-4-5.659V5a2 2 0 10-4 0v.341C7.67 6.165 6 8.388 6 11v3.159c0 .538-.214 1.055-.595 1.436L4 17h5m6 0v1a3 3 0 11-6 0v-1m6 0H9"></path>
+                                            </svg>
+                                            <p class="text-sm">No notifications yet</p>
+                                        </div>
+                                    <?php endif; ?>
+                                </div>
+                            </div>
+                        </div>
                         
                         <!-- Quick Add -->
                         <div x-data="{ open: false }" class="relative">
@@ -530,6 +583,23 @@
                 spread: 70,
                 origin: { y: 0.6 },
                 colors: ['#86e7b8', '#b2ffa8', '#d0ffb7', '#2d6a4f', '#40916c']
+            });
+        }
+        
+        // Mark notification as read
+        function markAsRead(notificationId, link) {
+            fetch(`/notifications/${notificationId}/read`, {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                    'X-CSRF-TOKEN': document.querySelector('meta[name="csrf-token"]').getAttribute('content')
+                }
+            }).then(() => {
+                if (link && link !== '#') {
+                    window.location.href = link;
+                } else {
+                    window.location.reload();
+                }
             });
         }
         

@@ -5,8 +5,13 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <meta name="csrf-token" content="{{ csrf_token() }}">
 
-    <title>TeamBoard - Modern Team Management Platform</title>
+    <title>Team Board</title>
     <meta name="description" content="TeamBoard is a powerful team management platform for managing employees, notices, and documents efficiently.">
+    
+    <!-- Favicon -->
+    <link rel="icon" type="image/png" href="/assets/logo.png?v=1">
+    <link rel="shortcut icon" type="image/png" href="/assets/logo.png?v=1">
+    <link rel="apple-touch-icon" href="/assets/logo.png?v=1">
 
     <!-- Fonts -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -165,11 +170,7 @@
             <div class="flex items-center justify-between h-16">
                 <!-- Logo -->
                 <a href="/" class="flex items-center gap-3 group">
-                    <div class="w-10 h-10 rounded-xl bg-gradient-to-br from-primary to-accent flex items-center justify-center shadow-lg group-hover:shadow-xl transition-all duration-300 group-hover:scale-110 animate-pulse-glow">
-                        <svg class="w-6 h-6 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 20h5v-2a3 3 0 00-5.356-1.857M17 20H7m10 0v-2c0-.656-.126-1.283-.356-1.857M7 20H2v-2a3 3 0 015.356-1.857M7 20v-2c0-.656.126-1.283.356-1.857m0 0a5.002 5.002 0 019.288 0M15 7a3 3 0 11-6 0 3 3 0 016 0z"></path>
-                        </svg>
-                    </div>
+                    <img src="{{ asset('assets/logo.png') }}" alt="TeamBoard Logo" class="w-10 h-10 object-contain shadow-lg group-hover:shadow-xl transition-all duration-300 group-hover:scale-110">
                     <span class="text-xl font-bold text-foreground tracking-tight font-display">TeamBoard</span>
                 </a>
                 

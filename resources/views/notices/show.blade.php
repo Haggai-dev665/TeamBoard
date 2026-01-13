@@ -49,5 +49,10 @@
             </div>
         </x-card-content>
     </x-card>
+
+    <!-- Feedback Section -->
+    @if(!auth()->user()->isSuperAdmin())
+        <x-feedback :item="$notice" type="notice" />
+    @endif
 </div>
 @endsection
