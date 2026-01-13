@@ -55,26 +55,26 @@
 
 ## ✨ Features
 
-### Phase 1: Foundation (Weeks 1-4)
+### Phase 1: Foundation
 - ✅ User authentication (Login/Logout)
 - ✅ Role-based authorization (Admin/User)
 - ✅ Dashboard with statistics
 - ✅ Responsive navigation
 
-### Phase 2: Employee Directory (Weeks 5-7)
+### Phase 2: Employee Directory 
 - ✅ Employee listing with pagination
 - ✅ Advanced search functionality
 - ✅ Department filtering
 - ✅ Individual employee profiles
 - ✅ Photo management
 
-### Phase 3: Notice Board (Weeks 8-10)
+### Phase 3: Notice Board 
 - ✅ Create, Read, Update, Delete notices
 - ✅ Priority levels (Low, Medium, High)
 - ✅ Author information display
 - ✅ Search and filter capabilities
 
-### Phase 4: Security & Testing (Weeks 11-12)
+### Phase 4: Security & Testing
 - ✅ CSRF protection
 - ✅ Input validation
 - ✅ Authorization policies
