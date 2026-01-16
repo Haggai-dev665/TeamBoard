@@ -272,7 +272,7 @@
                             </div>
                             <input id="name" type="text" name="name" value="{{ old('name') }}" required autofocus
                                 class="block w-full pl-12 pr-4 py-3.5 text-gray-900 border border-gray-200 rounded-xl bg-gray-50 focus:bg-white focus:border-[#86e7b8] focus:outline-none transition-all duration-300 input-glow"
-                                placeholder="John Doe">
+                                placeholder="Enter your name">
                         </div>
                         @error('name')
                             <p class="text-sm text-red-500 flex items-center gap-1">
@@ -297,7 +297,7 @@
                             </div>
                             <input id="email" type="email" name="email" value="{{ old('email') }}" required
                                 class="block w-full pl-12 pr-4 py-3.5 text-gray-900 border border-gray-200 rounded-xl bg-gray-50 focus:bg-white focus:border-[#86e7b8] focus:outline-none transition-all duration-300 input-glow"
-                                placeholder="john@teamboard.com">
+                                placeholder="Enter your email">
                         </div>
                         @error('email')
                             <p class="text-sm text-red-500 flex items-center gap-1">

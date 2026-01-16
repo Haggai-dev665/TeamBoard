@@ -51,6 +51,8 @@
 - ⚙️ **Settings** - Profile + password management
 - 🎨 **Modern UI** - Tailwind CSS + Alpine.js
 
+**Production:** https://teamboard.42web.io
+
 ---
 
 ## ✨ Features
@@ -613,6 +615,7 @@ tests/
 
 - [ ] Set `APP_ENV=production` in `.env`
 - [ ] Set `APP_DEBUG=false`
+- [ ] Set `APP_URL=https://teamboard.42web.io`
 - [ ] Configure production database
 - [ ] Run `php artisan config:cache`
 - [ ] Run `php artisan route:cache`
@@ -636,7 +639,7 @@ tests/
 ```nginx
 server {
     listen 80;
-    server_name teamboard.example.com;
+    server_name teamboard.42web.io;
     root /var/www/TeamBoard/public;
 
     add_header X-Frame-Options "SAMEORIGIN";
@@ -679,8 +682,11 @@ Add your screenshots into `docs/screenshots/` using these filenames (then they w
 ### Login
 ![Login](docs/screenshots/login.png)
 
-### User Dashboard
-![User Dashboard](docs/screenshots/dashboard-user.png)
+### Register
+![Register](docs/screenshots/register.png)
+
+### Dashboard
+![Dashboard](docs/screenshots/dashboard.png)
 
 ### Super Admin Dashboard
 ![Super Admin Dashboard](docs/screenshots/dashboard-admin.png)

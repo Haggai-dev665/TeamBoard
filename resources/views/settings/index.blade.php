@@ -29,6 +29,7 @@
                     <div>
                         <label for="name" class="block text-sm font-medium text-gray-700 mb-2">Name</label>
                         <input type="text" name="name" id="name" value="{{ old('name', auth()->user()->name) }}" required
+                               placeholder="Enter your name"
                                class="w-full px-4 py-3 rounded-xl border border-gray-300 focus:ring-2 focus:ring-primary focus:border-primary">
                         @error('name')
                             <p class="mt-1 text-sm text-red-600">{{ $message }}</p>
@@ -38,6 +39,7 @@
                     <div>
                         <label for="email" class="block text-sm font-medium text-gray-700 mb-2">Email</label>
                         <input type="email" name="email" id="email" value="{{ old('email', auth()->user()->email) }}" required
+                               placeholder="Enter your email"
                                class="w-full px-4 py-3 rounded-xl border border-gray-300 focus:ring-2 focus:ring-primary focus:border-primary">
                         @error('email')
                             <p class="mt-1 text-sm text-red-600">{{ $message }}</p>

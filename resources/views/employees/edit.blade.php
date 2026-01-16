@@ -23,6 +23,7 @@
                     <div>
                         <label for="name" class="block text-sm font-medium text-foreground">Name</label>
                         <input type="text" name="name" id="name" value="{{ old('name', $employee->name) }}" required
+                            placeholder="Enter your name"
                             class="mt-1 block w-full rounded-md border-input bg-background px-3 py-2 text-foreground shadow-sm focus:border-primary focus:outline-none focus:ring-1 focus:ring-primary">
                         @error('name')
                             <p class="mt-1 text-sm text-destructive">{{ $message }}</p>
@@ -32,6 +33,7 @@
                     <div>
                         <label for="email" class="block text-sm font-medium text-foreground">Email</label>
                         <input type="email" name="email" id="email" value="{{ old('email', $employee->email) }}" required
+                            placeholder="Enter your email"
                             class="mt-1 block w-full rounded-md border-input bg-background px-3 py-2 text-foreground shadow-sm focus:border-primary focus:outline-none focus:ring-1 focus:ring-primary">
                         @error('email')
                             <p class="mt-1 text-sm text-destructive">{{ $message }}</p>

@@ -27,7 +27,7 @@ class DatabaseSeeder extends Seeder
         // Create regular users
         $users = [
             User::create([
-                'name' => 'John Doe',
+                'name' => 'Sample User',
                 'email' => 'john@teamboard.com',
                 'password' => Hash::make('password'),
                 'role' => 'user',
