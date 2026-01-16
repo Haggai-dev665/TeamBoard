@@ -22,7 +22,7 @@ flowchart TD
   C2 -->|Auth::attempt| AUTH[Auth Session]
   AUTH -->|success| REDIR[redirect()->intended(/dashboard)]
 
-  A -->|GET /dashboard (auth middleware)| R3[routes/web.php]
+  A -->|"GET /dashboard (auth middleware)"| R3[routes/web.php]
   R3 --> D1[DashboardController@index]
   D1 --> U1{User::isSuperAdmin?}
   U1 -->|Yes| AD[adminDashboard()]
@@ -91,8 +91,8 @@ flowchart TD
   A[Browser] -->|POST /documents| R[routes/web.php]
   R --> C[DocumentController@store]
   C -->|validate title + file| VAL[Laravel Validation]
-  C -->|store file to disk (public)| FS[(storage/app/public/...)]
-  C -->|Document::create(uploader_id=auth)| D[(documents table)]
+  C -->|"store file to disk (public)"| FS[(storage/app/public/...)]
+  C -->|"Document::create(uploader_id=auth)"| D[(documents table)]
   C -->|NotificationService::notifyNewDocument| S[NotificationService]
   S -->|select users except uploader| Q[User query]
   Q -->|foreach user| CR[Notification::create]
