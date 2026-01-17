@@ -8,7 +8,20 @@ This document visualizes the key application flows (routes → controllers → m
 
 ---
 
-## 1) Auth → Dashboard (role-based routing)
+## MVC View
+
+- **Models**: Eloquent models in `app/Models` (e.g., `User`, `Notice`, `Document`) represent data + relationships.
+- **Views**: Blade templates in `resources/views` render the UI returned to the browser.
+- **Controllers**: HTTP entry points in `app/Http/Controllers` validate requests, apply authorization, call models/services, and return views or redirects.
+- **Routes**: Route mapping in `routes/web.php` connects URLs to controller actions and middleware.
+
+---
+
+## Request Lifecycle
+
+These diagrams show the **end-to-end HTTP request flow**: Browser → Route → Middleware → Controller → (Model/Service) → View/Redirect.
+
+### 1) Auth → Dashboard (role-based routing)
 
 ```mermaid
 flowchart TD
@@ -38,7 +51,7 @@ Key code:
 
 ---
 
-## 2) Register → Welcome Notification
+### 2) Register → Welcome Notification
 
 ```mermaid
 flowchart TD
@@ -62,7 +75,11 @@ Key code:
 
 ---
 
-## 3) Create Notice → Fan-out Notifications
+## Business Logic
+
+These diagrams focus on the **domain actions** (create notice/document, feedback, notifications, employee management, settings) and where the rules are enforced.
+
+### 3) Create Notice → Fan-out Notifications
 
 ```mermaid
 flowchart TD
@@ -84,7 +101,7 @@ Key code:
 
 ---
 
-## 4) Upload Document → Fan-out Notifications
+### 4) Upload Document → Fan-out Notifications
 
 ```mermaid
 flowchart TD
@@ -106,7 +123,7 @@ Key code:
 
 ---
 
-## 5) Feedback (Acknowledge/Disagree/Concern) → Concern notifies Super Admin
+### 5) Feedback (Acknowledge/Disagree/Concern) → Concern notifies Super Admin
 
 ```mermaid
 flowchart TD
@@ -134,7 +151,7 @@ Key code:
 
 ---
 
-## 6) Notifications → Mark as Read / Mark All as Read (ownership enforced)
+### 6) Notifications → Mark as Read / Mark All as Read (ownership enforced)
 
 ```mermaid
 flowchart TD
@@ -158,7 +175,7 @@ Key code:
 
 ---
 
-## 7) Employees CRUD (Policy-based authorization)
+### 7) Employees CRUD (Policy-based authorization)
 
 ```mermaid
 flowchart TD
@@ -200,7 +217,7 @@ Key code:
 
 ---
 
-## 8) Settings (Profile + Password)
+### 8) Settings (Profile + Password)
 
 ```mermaid
 flowchart TD
