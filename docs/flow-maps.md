@@ -1,4 +1,4 @@
-# TeamBoard Flow Maps
+b# TeamBoard Flow Maps
 
 This document visualizes the key application flows (routes → controllers → models/services → views) and where the main business rules live.
 
@@ -22,12 +22,12 @@ flowchart TD
   C2 -->|Auth attempt| AUTH["Auth session"]
   AUTH -->|success| REDIR["redirect intended /dashboard"]
 
-  A -->|"GET /dashboard (auth middleware)"| R3["routes/web.php"]
+  A -->|GET /dashboard (auth middleware)| R3["routes/web.php"]
   R3 --> D1["DashboardController.index"]
-  D1 --> U1{"User::isSuperAdmin?"}
-  U1 -->|Yes| AD["adminDashboard()"]
+  D1 --> U1{"User is Super Admin?"}
+  U1 -->|Yes| AD["adminDashboard"]
   AD --> VM1["View: admin/dashboard.blade.php"]
-  U1 -->|No| ED["employeeDashboard()"]
+  U1 -->|No| ED["employeeDashboard"]
   ED --> VM2["View: dashboard.blade.php"]
 ```
 
@@ -88,16 +88,16 @@ Key code:
 
 ```mermaid
 flowchart TD
-  A["Browser"] -->|"POST /documents"| R["routes/web.php"]
+  A["Browser"] -->|POST /documents| R["routes/web.php"]
   R --> C["DocumentController.store"]
-  C -->|"validate title + file"| VAL["Laravel Validation"]
-  C -->|"store file to disk (public)"| FS[("storage/app/public/...")]
-  C -->|"Document::create(uploader_id=auth)"| D[("documents table")]
-  C -->|"NotificationService::notifyNewDocument"| S["NotificationService"]
-  S -->|"select users except uploader"| Q["User query"]
-  Q -->|"foreach user"| CR["Notification::create"]
-  CR --> N[("notifications table")]
-  C -->|"redirect documents.index"| OUT["Browser redirected"]
+  C -->|validate title + file| VAL["Laravel validation"]
+  C -->|store file (public disk)| FS[(storage public)]
+  C -->|Document create| D[(documents table)]
+  C -->|notifyNewDocument| S["NotificationService"]
+  S -->|select users except uploader| Q["User query"]
+  Q -->|foreach user| CR["Notification create"]
+  CR --> N[(notifications table)]
+  C -->|redirect documents.index| OUT["Browser redirected"]
 ```
 
 Key code:
@@ -138,17 +138,17 @@ Key code:
 
 ```mermaid
 flowchart TD
-  A["Browser"] -->|POST /notifications/<id>/read| R["routes/web.php"]
+  A["Browser"] -->|POST /notifications/:id/read| R["routes/web.php"]
   R --> C["NotificationController.markAsRead"]
   C --> O{"Owns notification?"}
   O -->|No| ERR["403 Forbidden"]
   O -->|Yes| UPD["markAsRead"]
-  UPD --> DB[(notifications.read = true)]
+  UPD --> DB[(notifications read = true)]
   DB --> OUT["Back or JSON success"]
 
   A -->|POST /notifications/mark-all-read| R2["routes/web.php"]
   R2 --> C2["NotificationController.markAllAsRead"]
-  C2 -->|update unread scoped| DB2[(notifications.read = true for user)]
+  C2 -->|update unread scoped| DB2[(notifications read = true for user)]
   DB2 --> OUT2["Back or JSON success"]
 ```
 
@@ -180,12 +180,12 @@ flowchart TD
   S -->|if matching user by email| N[(notifications table)]
   C3 --> OUT["redirect employees.index"]
 
-  A -->|GET /employees/<employee>/edit| R4["routes/web.php"]
+  A -->|GET /employees/:employee/edit| R4["routes/web.php"]
   R4 --> C4["EmployeeController.edit"]
   C4 -->|authorize update employee| P2["EmployeePolicy.update"]
   P2 --> V3["View: employees/edit.blade.php"]
 
-  A -->|DELETE /employees/<employee>| R5["routes/web.php"]
+  A -->|DELETE /employees/:employee| R5["routes/web.php"]
   R5 --> C5["EmployeeController.destroy"]
   C5 -->|authorize delete employee| P3["EmployeePolicy.delete"]
   P3 -->|delete photo if exists| FS[(storage public)]
