@@ -1,4 +1,4 @@
-b# TeamBoard Flow Maps
+# TeamBoard Flow Maps
 
 This document visualizes the key application flows (routes → controllers → models/services → views) and where the main business rules live.
 
@@ -22,7 +22,7 @@ flowchart TD
   C2 -->|Auth attempt| AUTH["Auth session"]
   AUTH -->|success| REDIR["redirect intended /dashboard"]
 
-  A -->|GET /dashboard (auth middleware)| R3["routes/web.php"]
+  A -->|GET /dashboard - auth middleware| R3["routes/web.php"]
   R3 --> D1["DashboardController.index"]
   D1 --> U1{"User is Super Admin?"}
   U1 -->|Yes| AD["adminDashboard"]
@@ -91,7 +91,7 @@ flowchart TD
   A["Browser"] -->|POST /documents| R["routes/web.php"]
   R --> C["DocumentController.store"]
   C -->|validate title + file| VAL["Laravel validation"]
-  C -->|store file (public disk)| FS[(storage public)]
+  C -->|store file - public disk| FS[(storage public)]
   C -->|Document create| D[(documents table)]
   C -->|notifyNewDocument| S["NotificationService"]
   S -->|select users except uploader| Q["User query"]
