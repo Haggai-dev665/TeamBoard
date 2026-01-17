@@ -10,7 +10,7 @@ This document visualizes the key application flows (routes → controllers → m
 
 ## MVC View
 
-- **Models**: Eloquent models in `app/Models` (e.g., `User`, `Notice`, `Document`) represent data + relationships.
+- **Models**: models in `app/Models` (e.g., `User`, `Notice`, `Document`) represent data + relationships.
 - **Views**: Blade templates in `resources/views` render the UI returned to the browser.
 - **Controllers**: HTTP entry points in `app/Http/Controllers` validate requests, apply authorization, call models/services, and return views or redirects.
 - **Routes**: Route mapping in `routes/web.php` connects URLs to controller actions and middleware.
